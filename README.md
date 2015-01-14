@@ -1,3 +1,2 @@
 # shootDEMdown
-woah
-jotain lisaa tehty
+maven projekti lisatty
