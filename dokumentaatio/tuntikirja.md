@@ -14,5 +14,4 @@ githubin käyttökuntoon laittamista ja käyttämisen opiskelemista.
 
 **kohde**:
 
-ohjelmoinnin aloittaminen ja ohjelman rakenteen miettiminen.
-
+ohjelmoinnin aloittaminen ja ohjelman rakenteen miettiminen. Sekä Gitin kanssa kiroilua.
