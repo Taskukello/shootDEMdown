@@ -11,12 +11,12 @@ import java.util.Random;
  *
  * @author Aki
  */
-public class objektinArpoja {
+public class ObjektinArpoja {
 
     private int objektinArvo = 0;
     private int objektinKoordinaatti = 0;
     
-    public objektinArpoja() {
+    public ObjektinArpoja() {
 
     }
 
