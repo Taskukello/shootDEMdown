@@ -6,7 +6,7 @@
 
 githubin käyttökuntoon laittamista ja käyttämisen opiskelemista.
 
-
+___________________________________
 
 **päivämäärä**: 15.1.2015
 
@@ -15,3 +15,11 @@ githubin käyttökuntoon laittamista ja käyttämisen opiskelemista.
 **kohde**:
 
 ohjelmoinnin aloittaminen ja ohjelman rakenteen miettiminen. Sekä Gitin kanssa kiroilua.
+
+**aika**: 19:45-22:00
+
+**kohde**:
+
+ohjelman jatkamista ja testien tekemisen aloittaminen.
+
+____________________________________
