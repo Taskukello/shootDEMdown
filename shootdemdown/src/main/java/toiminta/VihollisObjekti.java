@@ -41,4 +41,8 @@ public class VihollisObjekti {
         graphics.fillOval(x, y, 5, 5);
     }
 
+    public boolean kuoleeko() {
+        return this.y == 0;
+    }
+
 }

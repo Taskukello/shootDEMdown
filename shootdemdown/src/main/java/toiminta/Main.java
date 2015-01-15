@@ -22,7 +22,7 @@ public class Main {
         Kayttoliittyma kayttoliittyma = new Kayttoliittyma();
         SwingUtilities.invokeLater(kayttoliittyma);
         
-        Shootdemdown peli = new Shootdemdown(kayttoliittyma);
+        Shootdemdown peli = new Shootdemdown();
         peli.pelaa();
     }
 

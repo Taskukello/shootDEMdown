@@ -16,30 +16,39 @@ import kayttoliittyma.Kayttoliittyma;
 public class Shootdemdown {
 
     private ArrayList<VihollisObjekti> viholliset = new ArrayList<VihollisObjekti>();
-    private Kayttoliittyma liittyma;
+    private int liikkumiskerrat = 0;
 
-    public Shootdemdown(Kayttoliittyma liittyma) {
-        this.liittyma = liittyma;
+    public Shootdemdown() {
+
     }
 
     public void pelaa() {
         //  while (true) {
         luoBlokki();
-        liikutaKaikkia();
 
         // }
     }
 
     public void liikutaKaikkia() {
-        int liikkumiskerrat = 30;
-        while (liikkumiskerrat > 0) {
-            for (VihollisObjekti objekti : viholliset) {
+        ArrayList<VihollisObjekti> poistettavat = new ArrayList<VihollisObjekti>();
+        int liikkumiset = this.liikkumiskerrat;
+
+        int k = 0;
+
+        for (VihollisObjekti objekti : viholliset) {
+            while (liikkumiset > 0) {
                 objekti.liiku();
-                liittyma.asetaHahmo(objekti);
-                liittyma.luoKomponentit(liittyma.getFrame());
+                k++;
+                liikkumiset--;
 
             }
-            liikkumiskerrat--;
+            if (objekti.kuoleeko() == true) {
+                poistettavat.add(objekti);
+            }
+
+        }
+        if (!poistettavat.isEmpty()) {
+            poistaVihollisia(poistettavat);
         }
     }
 
@@ -47,6 +56,38 @@ public class Shootdemdown {
         ObjektinArpoja arpoja = new ObjektinArpoja();
         VihollisObjekti objekti = new VihollisObjekti(arpoja.arvoObjekti(), arpoja.arvoKoordinaatti());
         viholliset.add(objekti);
+
+    }
+
+    public void setLiikkumisKerrat(int o) {
+        this.liikkumiskerrat = o;
+    }
+
+    public void poistaVihollisia(ArrayList<VihollisObjekti> l) {
+        int k = 0;
+        for (VihollisObjekti o : l) {
+            while (this.viholliset.size() > k) {
+                VihollisObjekti tarkastettava = this.viholliset.get(k);
+
+                if (tarkastettava.equals(o)) {
+                    this.viholliset.remove(k);
+                }
+                k++;
+            }
+        }
+
+    }
+
+    public int getVihollisetKoko() {
+        if (this.viholliset == null) {
+            return 0;
+        } else {
+            return this.viholliset.size();
+        }
+    }
+
+    public ArrayList<VihollisObjekti> getViholliset() {
+        return this.viholliset;
 
     }
 

@@ -19,21 +19,15 @@ public class PiirtoAlusta extends JPanel {
 
     private VihollisObjekti blokki;
 
-    public PiirtoAlusta(VihollisObjekti blokki) {
+    public PiirtoAlusta() {
         super.setBackground(Color.WHITE);
-        this.blokki = blokki;
+
     }
 
     @Override
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
-        blokki.piirra(graphics);
-    }
 
-    @Override
-    public void paint(Graphics graphics) {
-        super.paintComponent(graphics);
-        blokki.piirra(graphics);
     }
 
 }

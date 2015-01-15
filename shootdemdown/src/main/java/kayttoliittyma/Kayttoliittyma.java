@@ -19,10 +19,9 @@ public class Kayttoliittyma implements Runnable {
 
     private JFrame frame;
     private VihollisObjekti objekti;
-    private PiirtoAlusta piirtoalusta = new PiirtoAlusta(objekti);
 
     public Kayttoliittyma() {
-        ;
+
     }
 
     @Override
@@ -43,11 +42,8 @@ public class Kayttoliittyma implements Runnable {
     }
 
     public void luoKomponentit(Container container) {
+        PiirtoAlusta piirtoalusta = new PiirtoAlusta();
         container.add(piirtoalusta);
-    }
-
-    public void luoObjektit(Container container) {
-       
     }
 
     public JFrame getFrame() {
