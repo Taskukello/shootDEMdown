@@ -19,10 +19,10 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        Kayttoliittyma kayttoliittyma = new Kayttoliittyma();
-        SwingUtilities.invokeLater(kayttoliittyma);
-        
-        Shootdemdown peli = new Shootdemdown();
+   //     Kayttoliittyma kayttoliittyma = new Kayttoliittyma();
+   //     SwingUtilities.invokeLater(kayttoliittyma);
+
+        Logiikka peli = new Logiikka();
         peli.pelaa();
     }
 

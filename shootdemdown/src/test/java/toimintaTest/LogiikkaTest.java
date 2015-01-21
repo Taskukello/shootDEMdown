@@ -11,18 +11,18 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import toiminta.Shootdemdown;
+import toiminta.Logiikka;
 import toiminta.VihollisObjekti;
 
 /**
  *
  * @author Aki
  */
-public class ShootdemdownTest {
+public class LogiikkaTest {
 
-    private Shootdemdown jokuNimi = new Shootdemdown();
+    private Logiikka jokuNimi = new Logiikka();
 
-    public ShootdemdownTest() {
+    public LogiikkaTest() {
     }
 
     @Before
@@ -37,7 +37,7 @@ public class ShootdemdownTest {
 
     @Test
     public void onkoVihollisiaAlussaNolla() {
-        Shootdemdown j = new Shootdemdown();
+        Logiikka j = new Logiikka();
         assertEquals(j.getVihollisetKoko(), 0);
     }
     
@@ -62,6 +62,13 @@ public class ShootdemdownTest {
         this.jokuNimi.setLiikkumisKerrat(29);
         this.jokuNimi.liikutaKaikkia();
         assertEquals(this.jokuNimi.getVihollisetKoko() , 0);
+    }
+    
+    @Test
+    public void liikutaKaikkiaToimii(){
+        this.jokuNimi.pelaa();
+        assertEquals(this.jokuNimi.getAlus().getElamat(), 0);
+        assertEquals(this.jokuNimi.loppuukoPeli(), true);
     }
     
     

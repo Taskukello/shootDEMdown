@@ -22,10 +22,9 @@ public class VihollisObjekti {
         this.muoto = muoto;
     }
 
-    public void liiku() {
+    public boolean liiku() {
         y--;
-        if (y == 0) {
-        }
+        return !(y == 0 || y < 0);
 
     }
 
@@ -37,8 +36,12 @@ public class VihollisObjekti {
         return this.x;
     }
 
-    public void piirra(Graphics graphics) {
-        graphics.fillOval(x, y, 5, 5);
+    public int getMuoto() {
+        return this.muoto;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     public boolean kuoleeko() {
