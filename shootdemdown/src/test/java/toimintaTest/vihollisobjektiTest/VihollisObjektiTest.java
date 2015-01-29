@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package toimintaTest;
+package toimintaTest.vihollisobjektiTest;
 
+import javax.swing.SwingUtilities;
+import kayttoliittyma.Kayttoliittyma;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import toiminta.VihollisObjekti;
+import toiminta.vihollisobjekti.VihollisObjekti;
 
 /**
  *
@@ -36,36 +38,35 @@ public class VihollisObjektiTest {
 
     @Test
     public void antaaYArvonOikein() {
-        assertEquals(this.objekti.getY(), 29);
+        assertEquals(this.objekti.getY(), 700);
     }
 
     @Test
     public void antaaOikeanMuodon() {
         assertEquals(this.objekti.getMuoto(), 3);
     }
-    
+
     @Test
-    public void SetYToimii(){
+    public void SetYToimii() {
         this.objekti.setY(5);
         assertEquals(this.objekti.getY(), 5);
     }
 
     @Test
-    public void liikuPalauttaaFalseKunYNolla() {
-        this.objekti.setY(0);
-        if (this.objekti.liiku() == false){
-            assertTrue(true);
-        }else{
-            fail("vihollisobjekti palautti true falsen sijaan.");
-        }
+    public void liikuToimii() {
+        this.objekti.liiku();
+        assertEquals(this.objekti.getY(), 690);
     }
-    
+
     @Test
-    public void liikuPlauttaaTrueKunEiNolla(){
-        if (this.objekti.liiku() == true){
-            assertTrue(true);
-        }else{
-            fail("vihollisobjekti palautti false truen sijaan.");
-        }
+    public void palauttaaOikeanKoon() {
+        assertEquals(this.objekti.getKoko(), 20);
     }
+
+    @Test
+    public void setKokoToimii() {
+        this.objekti.setKoko(40);
+        assertEquals(this.objekti.getKoko(), 40);
+    }
+
 }

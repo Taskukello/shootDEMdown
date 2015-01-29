@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package toiminta;
+package toiminta.vihollisobjekti;
 
 import java.util.Random;
 
@@ -27,7 +27,8 @@ public class ObjektinArpoja {
     }
 
     public int arvoKoordinaatti() {
-        this.objektinKoordinaatti = arpaKone(20);
+        this.objektinKoordinaatti = arpaKone(48) *10;
+        
         return this.objektinKoordinaatti;
 
     }

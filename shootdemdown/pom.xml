@@ -32,18 +32,18 @@
                 </configuration>
                 <version>2.5</version>
             </plugin>
-<plugin>
-    <groupId>org.codehaus.mojo</groupId>
-    <artifactId>cobertura-maven-plugin</artifactId>
-    <configuration>
-        <instrumentation>
-            <includes>
-                <include>toiminta/*.VihollisObjekti</include>
-            </includes>
-        </instrumentation>
-    </configuration>
-    <version>2.6</version>
-</plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <configuration>
+                    <instrumentation>
+                        <includes>
+                            <include>shootdemdown/**/*.Class</include>
+                        </includes>
+                    </instrumentation>
+                </configuration>
+                <version>2.6</version>
+            </plugin>
             <plugin>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
@@ -51,13 +51,15 @@
                 <configuration>
                     <targetClasses>
                         <param>toiminta.Logiikka*</param>
-                        <param>toiminta.VihollisObjekti*</param>
-                        <param>toiminta.ObjektinArpoja*</param>
+                        <param>toiminta.vihollisobjekti.VihollisObjekti*</param>
+                        <param>toiminta.vihollisobjekti.ObjektinArpoja*</param>
+                        <param>toiminta.pelaaja.Alus*</param>
                     </targetClasses>
                     <targetTests>
                         <param>toimintaTest.LogiikkaTest*</param>
-                        <param>toimintaTest.VihollisObjektiTest*</param>
-                        <param>toimintaTest.ObjektinArpojaTest*</param>
+                        <param>toimintaTest.vihollisobjektiTest.VihollisObjektiTest*</param>
+                        <param>toimintaTest.vihollisobjektiTest.ObjektinArpojaTest*</param>
+                        <param>toimintaTest.pelaajaTest.AlusTest*</param>
                     </targetTests>
                 </configuration>
             </plugin>

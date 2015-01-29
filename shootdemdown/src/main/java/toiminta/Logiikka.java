@@ -5,9 +5,13 @@
  */
 package toiminta;
 
+import toiminta.vihollisobjekti.ObjektinArpoja;
+import toiminta.vihollisobjekti.VihollisObjekti;
 import java.awt.List;
 import java.util.ArrayList;
+import javax.swing.SwingUtilities;
 import kayttoliittyma.Kayttoliittyma;
+import kayttoliittyma.NappaimistonKuuntelija;
 import toiminta.pelaaja.Alus;
 
 /**
@@ -19,51 +23,86 @@ public class Logiikka {
     private ArrayList<VihollisObjekti> viholliset = new ArrayList<VihollisObjekti>();
     private ArrayList<VihollisObjekti> poistettavat = new ArrayList<VihollisObjekti>();
     private Alus alus = new Alus();
-    private OsumanTarkistaja tarkista;
     private int liikkumiskerrat = 3;
     private boolean kuoleekoPelaaja = true;
+    public Kayttoliittyma liittyma;
+    private int viivytysAika = 1000;
 
-    public Logiikka() {
+    public Logiikka(Kayttoliittyma liittyma) {
+        this.liittyma = liittyma;
 
     }
 
-    public void pelaa() {
-        while (kuoleekoPelaaja == true) {
-            luoBlokki();
-            System.out.println("aloitus");                                          //ei viimeisessä lopputuloksessa
-            liikutaKaikkia();
-            System.out.println("objekteja: " + this.viholliset.size());             //ei viimeisessä lopputuloksessa
+    public Logiikka() {
+        this.viivytysAika = 0;
+    }
+
+    public void viivyta() {
+        if (viivytysAika > 0) {
+            try {
+                Thread.sleep(viivytysAika);
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
         }
-        System.out.println("Aluksesi tuhoutui!!");
+    }
+
+    public void pelaa() {
+
+        while (kuoleekoPelaaja == true) {
+            viivyta();
+            luoBlokki();
+            liikutaKaikkia();
+      //      System.out.println("objekteja: " + this.viholliset.size());             //ei viimeisessä lopputuloksessa
+
+        }
+        System.out.println("Aluksesi tuhoutui!!");                                  //tämäkin kai katoaa
     }
 
     public void liikutaKaikkia() {
 
         int liikkumiset = this.liikkumiskerrat;
-        while (liikkumiset > 0) {
+        while (liikkumiset > 0 && !this.viholliset.isEmpty()) {
             for (VihollisObjekti objekti : viholliset) {
-                this.tarkista = new OsumanTarkistaja(this.alus, objekti);
+                OsumanTarkistaja tarkista = new OsumanTarkistaja(this.alus, objekti);
 
                 objekti.liiku();
-                System.out.println("y: " + objekti.getY());                         //ei viimeisessä lopputuloksessa
-                if (katsotaanpaOsumaTilannetta(objekti) == true) {
+
+                if (katsotaanpaOsumaTilannetta(objekti, tarkista) == true) {
                     break;
                 }
             }
             liikkumiset--;
+     //       System.out.println("y: " + this.viholliset.get(0).getY() + " x: " + this.viholliset.get(0).getX());
             if (!poistettavat.isEmpty()) {
-                poistaVihollisia(poistettavat);
+                poistaVihollisia();
                 poistettavat = new ArrayList<VihollisObjekti>();
             }
 
         }
+
+        liittymanPaivitys();
     }
 
-    public boolean katsotaanpaOsumaTilannetta(VihollisObjekti objekti) {
-        if (objekti.getX() == 1) {
-            tarkista.osuma();
-            if (loppuukoPeli() == true) {
-                return true;
+    public void liittymanPaivitys() {
+        if (this.liittyma != null) {                                            //tämä on puhtaasti testien takia.
+            this.liittyma.asetaHahmot(this.viholliset, this.alus);
+            this.liittyma.paivita();
+        }
+    }
+
+    public boolean katsotaanpaOsumaTilannetta(VihollisObjekti objekti, OsumanTarkistaja tarkista) {
+        int ox = objekti.getX();
+        int ax = alus.getX();
+
+        if (objekti.getY() == 100) {
+            if (ox < ax && ox + objekti.getKoko() > ax || ox > ax && ox < ax + this.alus.getKoko() || ax == ox) {
+                tarkista.osuma();
+                this.poistettavat.add(objekti);
+
+                if (loppuukoPeli() == true) {
+                    return true;
+                }
             }
         }
 
@@ -89,19 +128,8 @@ public class Logiikka {
         this.liikkumiskerrat = o;
     }
 
-    public void poistaVihollisia(ArrayList<VihollisObjekti> l) {
-        int k = 0;
-        for (VihollisObjekti o : l) {
-            while (this.viholliset.size() > k) {
-                VihollisObjekti tarkastettava = this.viholliset.get(k);
-
-                if (tarkastettava.equals(o)) {
-                    this.viholliset.remove(k);
-                }
-                k++;
-            }
-
-        }
+    public void poistaVihollisia() {
+        this.viholliset.removeAll(this.poistettavat);
 
     }
 
@@ -110,7 +138,7 @@ public class Logiikka {
             this.kuoleekoPelaaja = false;
             return true;
         } else {
-            System.out.println("menetit elämän!");
+            System.out.println("menetit elämän!");                              //tämäkään ei tule olemaa lopullisessa versiossa
             return false;
         }
     }
@@ -125,8 +153,24 @@ public class Logiikka {
         return this.viholliset;
 
     }
-    
-    public Alus getAlus(){
+
+    public Alus getAlus() {
         return this.alus;
+    }
+
+    public void setPoistettavat(ArrayList<VihollisObjekti> poistettavat) {
+        this.poistettavat = poistettavat;
+    }
+
+    public void setViivytysAika(int aika) {
+        this.viivytysAika = aika;
+    }
+    
+    public ArrayList<VihollisObjekti> getPoistettavat(){
+        return this.poistettavat;
+    }
+    
+    public void addVihollinen(VihollisObjekti objekti){
+        this.viholliset.add(objekti);
     }
 }

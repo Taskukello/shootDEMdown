@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package toimintaTest;
+package toimintaTest.vihollisobjektiTest;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import toiminta.ObjektinArpoja;
+import toiminta.vihollisobjekti.ObjektinArpoja;
 
 /**
  *
@@ -67,7 +67,7 @@ public class ObjektinArpojaTest {
     @Test
     public void toimiikoObjektinKoordinaatinArpoja() {
 
-        if (arpoja.arvoKoordinaatti() > 0 && arpoja.getObjektinKoordinaatti() < 20) {
+        if (arpoja.arvoKoordinaatti() > 0 && arpoja.getObjektinKoordinaatti() <= 480) {
             assertTrue(true);
         } else {
             fail("Arpoja antaa liian suuren tai pienen arvon!");

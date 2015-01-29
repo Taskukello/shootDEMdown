@@ -5,6 +5,7 @@
  */
 package toiminta;
 
+import toiminta.vihollisobjekti.VihollisObjekti;
 import toiminta.pelaaja.Alus;
 
 /**
