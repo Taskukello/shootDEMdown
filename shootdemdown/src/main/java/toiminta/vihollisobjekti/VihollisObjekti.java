@@ -25,8 +25,8 @@ public class VihollisObjekti {
     }
 
     public void liiku() {
-        y = y - 10;
 
+            y = y - 2;
     }
 
     public int getY() {
@@ -46,7 +46,7 @@ public class VihollisObjekti {
     }
 
     public boolean kuoleeko() {
-        return this.y == 0;
+        return this.y <= 0;
     }
 
     public boolean piirra(Graphics graphics) {
@@ -59,7 +59,7 @@ public class VihollisObjekti {
             graphics.fillRect(x, 700 - y, koko, koko);
             return true;
         } else if (this.muoto == 3) {
-            graphics.setColor(Color.YELLOW);
+            graphics.setColor(Color.RED);
             graphics.fillRect(x, 700 - y, koko, koko);
             return true;
         } else {

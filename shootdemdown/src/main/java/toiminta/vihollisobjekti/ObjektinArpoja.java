@@ -21,7 +21,14 @@ public class ObjektinArpoja {
     }
 
     public int arvoObjekti() {
-        this.objektinArvo = arpaKone(3);
+        int prosentti = arpaKone(100);
+        if (prosentti <= 70){
+            this.objektinArvo = 1;
+        }else if (prosentti <= 90 && prosentti > 70){
+            this.objektinArvo = 2;
+        }else{
+            this.objektinArvo = 3;
+        }
         return this.objektinArvo;
 
     }

@@ -55,7 +55,7 @@ public class VihollisObjektiTest {
     @Test
     public void liikuToimii() {
         this.objekti.liiku();
-        assertEquals(this.objekti.getY(), 690);
+        assertEquals(this.objekti.getY(), 698);
     }
 
     @Test

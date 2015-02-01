@@ -5,6 +5,9 @@
  */
 package toiminta.pelaaja;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 /**
  *
  * @author Aki
@@ -12,7 +15,9 @@ package toiminta.pelaaja;
 public class Ammus {
 
     private int x = 0;
-    private int y = 0;
+    private int y = 110;
+    private int leveys = 6;
+    private int ammuksenPituus = 10;
 
     public void setX(int x) {
         this.x = x;
@@ -21,13 +26,33 @@ public class Ammus {
     public int getX() {
         return this.x;
     }
-    
-    public void setY(int y){
+
+    public void setY(int y) {
         this.y = y;
     }
-    
-    public int getY(){
+
+    public int getY() {
         return y;
+    }
+
+    public int getKoko() {
+        return this.leveys;
+    }
+
+    public void siirry() {
+        if (this.y < 700) {
+            y = y + 10;
+        }
+    }
+
+    public void piirra(Graphics graphics, int x, int y) {
+        if (x != -1) {
+            this.x = x + 7;
+            this.y = y;
+        }
+        graphics.setColor(Color.ORANGE);
+        graphics.fillRect(this.x, 700 - this.y, leveys, ammuksenPituus);
+
     }
 
 }

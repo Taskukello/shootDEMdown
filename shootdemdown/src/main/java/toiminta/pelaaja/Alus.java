@@ -5,7 +5,12 @@
  */
 package toiminta.pelaaja;
 
+import java.awt.Component;
+import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.ImageObserver;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,10 +18,12 @@ import java.awt.Graphics;
  */
 public class Alus {
 
+    private Component component;
     private int x = 250;
     private int y = 100;
     private int elamat = 3;
     private int koko = 20;
+    private ArrayList<Ammus> ammukset = new ArrayList<Ammus>();
 
     public Alus() {
 
@@ -55,10 +62,13 @@ public class Alus {
 
     public void piirra(Graphics graphics) {
         graphics.fillRect(x, 600, koko, koko);
+
+
     }
 
+
     public void siirry(int x) {
-        
+
         if (this.x >= 0 && x < 0) {
             int t = this.x + x;
             if (t < 0) {
@@ -82,5 +92,19 @@ public class Alus {
 
     public int getKoko() {
         return this.koko;
+    }
+
+    public void luoAmmus(Graphics graphics) {
+        Ammus ammus = new Ammus();
+        ammukset.add(ammus);
+        ammus.piirra(graphics, this.x, this.y);
+    }
+
+    public ArrayList<Ammus> getAmmukset() {
+        return this.ammukset;
+    }
+
+    public void setAmmukset(ArrayList<Ammus> ammus) {
+        this.ammukset = ammus;
     }
 }

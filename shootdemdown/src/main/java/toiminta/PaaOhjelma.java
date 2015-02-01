@@ -8,6 +8,7 @@ package toiminta;
 import java.util.ArrayList;
 import javax.swing.SwingUtilities;
 import kayttoliittyma.Kayttoliittyma;
+import toiminta.pelaaja.Alus;
 import toiminta.vihollisobjekti.VihollisObjekti;
 
 /**
@@ -25,7 +26,7 @@ public class PaaOhjelma {
 
         SwingUtilities.invokeLater(kayttoliittyma);
         Logiikka peli = new Logiikka(kayttoliittyma);
-
+        peli.valmisteleAlusta();
         peli.pelaa();
     }
 

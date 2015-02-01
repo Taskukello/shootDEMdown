@@ -24,19 +24,16 @@ public class OsumanTarkistaja {
 
     public void osuma() {
         if (this.objekti.getMuoto() == 1) {
-            this.alus.lisaaElama();
-        } else if (this.objekti.getMuoto() == 2) {
-
             this.alus.menetaElama();
+        } else if (this.objekti.getMuoto() == 3) {
+            this.alus.lisaaElama();
+
         }
 
     }
-    
-    
-    
 
     public void osumaAntaaKivastiPisteita() {
-
+        //tulee jossain välissä jotain kivaa 
     }
 
 }

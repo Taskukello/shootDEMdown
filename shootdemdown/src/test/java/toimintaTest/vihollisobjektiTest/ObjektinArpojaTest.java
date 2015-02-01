@@ -78,7 +78,7 @@ public class ObjektinArpojaTest {
 
     @Test
     public void toimiikoObjektinArpoja() {
-        if (arpoja.arvoObjekti() > 0 && arpoja.getObjektinArvo() < 4) {
+        if (arpoja.arvoObjekti() > 0 && arpoja.getObjektinArvo() < 101) {
             assertTrue(true);
         } else {
             fail("Arpoja antaa liian suuren tai pienen arvon!");

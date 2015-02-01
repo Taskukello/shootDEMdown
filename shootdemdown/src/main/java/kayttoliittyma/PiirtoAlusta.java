@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import toiminta.vihollisobjekti.VihollisObjekti;
 import toiminta.pelaaja.Alus;
+import toiminta.pelaaja.Ammus;
 
 /**
  *
@@ -21,9 +22,11 @@ public class PiirtoAlusta extends JPanel {
 
     private Alus alus;
     private ArrayList<VihollisObjekti> viholliset;
+    private ArrayList<Ammus> ammukset;
 
-    public PiirtoAlusta(ArrayList<VihollisObjekti> v, Alus alus) {
+    public PiirtoAlusta(ArrayList<VihollisObjekti> v, ArrayList<Ammus> ammus, Alus alus) {
         super.setBackground(Color.WHITE);
+        this.ammukset = ammus;
         this.viholliset = v;
         this.alus = alus;
 
@@ -31,15 +34,32 @@ public class PiirtoAlusta extends JPanel {
 
     @Override
     protected void paintComponent(Graphics graphics) {
+
         super.paintComponent(graphics);
-        if (this.viholliset != null || this.alus != null) {
+        if (this.viholliset != null) {
+
             alus.piirra(graphics);
+
             for (VihollisObjekti objekti : viholliset) {
                 objekti.piirra(graphics);
+
+            }
+            for (Ammus ammus : ammukset) {
+                ammus.piirra(graphics, -1, -1);
             }
 
         }
 
+    }public void setViholliset(ArrayList<VihollisObjekti> o){
+        this.viholliset = o;
+    }
+    
+    public void setAlus(Alus a){
+        this.alus = a;
+    }
+    
+    public void setAmmukset(ArrayList<Ammus> a){
+        this.ammukset = a;
     }
 
 }
