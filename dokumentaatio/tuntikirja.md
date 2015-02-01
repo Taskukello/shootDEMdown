@@ -107,3 +107,19 @@ ________________________________________
 
 **kohde**:
 testien laajuuden kasvattamista. luokkakaavion päivitys
+
+__________________________________________
+**päivämäärä**:30.1.2015
+
+**aika**:16.00-01.00
+
+**kohde**:
+ohjelman hajottaminen (taas) ja korjaus, sen lisäksi bugien korjailua ja käyttöliittymän fixailua
+
+__________________________________________
+**päivämäärä**:31.1.2015
+
+**aika**:18.20-22.00
+
+**kohde**:
+pelin alustavaan pelikuntoon laittaminen.
