@@ -9,7 +9,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- *
+ *ylläpitää ammusta ja hoitaa sen koordinaatteja
  * @author Aki
  */
 public class Ammus {
@@ -40,11 +40,16 @@ public class Ammus {
     }
 
     public void siirry() {
-        if (this.y < 700) {
+        if (this.y + 10 <= 700) {
             y = y + 10;
         }
     }
-
+/**
+ * piirtää/siirtää ammusta käyttöliittymällä
+ * @param graphics piirtoalustasta tuodut grafiikat
+ * @param x -koordinaatti mistä ammus ammuttiin (ei muutu kun määritelty)
+ * @param y -koordinaatti missä y koordinaatissa ammus tällä hetkin sijaitsee
+ */
     public void piirra(Graphics graphics, int x, int y) {
         if (x != -1) {
             this.x = x + 7;

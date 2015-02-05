@@ -54,12 +54,14 @@
                         <param>toiminta.vihollisobjekti.VihollisObjekti*</param>
                         <param>toiminta.vihollisobjekti.ObjektinArpoja*</param>
                         <param>toiminta.pelaaja.Alus*</param>
+                        <param>toiminta.pelaaja.Ammus*</param>
                     </targetClasses>
                     <targetTests>
                         <param>toimintaTest.LogiikkaTest*</param>
                         <param>toimintaTest.vihollisobjektiTest.VihollisObjektiTest*</param>
                         <param>toimintaTest.vihollisobjektiTest.ObjektinArpojaTest*</param>
                         <param>toimintaTest.pelaajaTest.AlusTest*</param>
+                        <param>toimintaTest.pelaajaTest.AmmusTest*</param>
                     </targetTests>
                 </configuration>
             </plugin>

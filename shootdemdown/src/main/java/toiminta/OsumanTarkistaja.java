@@ -9,19 +9,21 @@ import toiminta.vihollisobjekti.VihollisObjekti;
 import toiminta.pelaaja.Alus;
 
 /**
- *
+ * tarkistelee osumatilanteen objektin ja aluksen välillä, luokka on vielä hyvin tyhjä mutta täyttyy jatkossa
  * @author Aki
  */
 public class OsumanTarkistaja {
 
     private Alus alus;
     private VihollisObjekti objekti;
-
+    
     public OsumanTarkistaja(Alus alus, VihollisObjekti o) {
         this.alus = alus;
         this.objekti = o;
     }
-
+/**
+ * tarkistaa millainen vihollinen on osunut alukseen elämää antava vai tappava
+ */
     public void osuma() {
         if (this.objekti.getMuoto() == 1) {
             this.alus.menetaElama();
@@ -32,8 +34,5 @@ public class OsumanTarkistaja {
 
     }
 
-    public void osumaAntaaKivastiPisteita() {
-        //tulee jossain välissä jotain kivaa 
-    }
 
 }

@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 /**
+ * ylläpitää vihollisobjektia
  *
  * @author Aki
  */
@@ -24,9 +25,12 @@ public class VihollisObjekti {
         this.muoto = muoto;
     }
 
+    /**
+     * liikuttaa koordinaatistolla-Y 2 alaspäin vihollisobjektia
+     */
     public void liiku() {
 
-            y = y - 2;
+        y = y - 2;
     }
 
     public int getY() {
@@ -45,10 +49,18 @@ public class VihollisObjekti {
         this.y = y;
     }
 
+    /**
+     * tarkistaa onko vihollisobjekti saavuttanut nollapisteen
+     */
     public boolean kuoleeko() {
         return this.y <= 0;
     }
-
+    /**
+     * piirtää/siirtää vihollisobjektin käyttöliittmällä
+     * @param graphics tulee piirtoalustasta
+     * @return true jos objektin saa luotua. 
+     * Huom!. return arvo on testien takia.
+     */
     public boolean piirra(Graphics graphics) {
         if (this.muoto == 1) {
             graphics.setColor(Color.BLACK);

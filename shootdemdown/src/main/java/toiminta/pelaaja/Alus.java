@@ -13,7 +13,7 @@ import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
 /**
- *
+ * ylläpitää aluksen liikettä sen kuntoa. hoitaa ammuksia
  * @author Aki
  */
 public class Alus {
@@ -44,12 +44,18 @@ public class Alus {
     public int getY() {
         return this.y;
     }
-
+/**
+ * poistaa elämiä alukselta kunnes elämiä on nolla
+ * @return palauttaa true jos elämiä on vielä jäljellä
+ */
     public boolean menetaElama() {
         this.elamat--;
         return this.elamat != 0;
     }
-
+/**
+ * lisää elämiä alukselle kun kiltti vihollinen on napattu
+ * Huom! elämät ovat rajoitettu viiteen
+ */
     public void lisaaElama() {
         if (this.elamat < 5) {
             this.elamat++;
@@ -59,14 +65,19 @@ public class Alus {
     public int getElamat() {
         return elamat;
     }
-
+/**
+ * piirtää aluksen käyttöliittymälle/ päivittää aluksen käyttöliittymälle
+ * @param graphics eh... piirtoalusta lähettää grafiikat...?
+ */
     public void piirra(Graphics graphics) {
         graphics.fillRect(x, 600, koko, koko);
 
-
     }
-
-
+/**
+ * muuttaa aluksen koordinaatteja kun nuolinappeja painetaan
+ * @param x kuinka paljon alus siirtyy/ mihin suuntaan 
+ * tarkennus. negatiivinen arvo vasemmalle, positiivinen oikealle
+ */
     public void siirry(int x) {
 
         if (this.x >= 0 && x < 0) {
@@ -93,7 +104,10 @@ public class Alus {
     public int getKoko() {
         return this.koko;
     }
-
+/**
+ * luo ammuksen kun nappainta Space painettu.
+ * @param graphics piirtoalustan lähettämät grafiikat tai jotain....
+ */
     public void luoAmmus(Graphics graphics) {
         Ammus ammus = new Ammus();
         ammukset.add(ammus);
@@ -107,4 +121,9 @@ public class Alus {
     public void setAmmukset(ArrayList<Ammus> ammus) {
         this.ammukset = ammus;
     }
+
+    public void addAmmus(Ammus ammus) {
+        this.ammukset.add(ammus);
+    }
+
 }

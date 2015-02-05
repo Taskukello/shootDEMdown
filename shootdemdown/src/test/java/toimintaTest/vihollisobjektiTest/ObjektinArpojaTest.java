@@ -34,7 +34,7 @@ public class ObjektinArpojaTest {
     }
 
     @Test
-    public void meneekoArpaKoneRajojenYli() {                       
+    public void meneekoArpaKoneRajojenYli() {
         int k = 0;
         while (k < 10000) {
             int r = arpoja.arpaKone(2);
@@ -57,6 +57,32 @@ public class ObjektinArpojaTest {
         assertEquals(arpoja.getObjektinArvo(), 0);
 
     }
+
+    @Test
+    public void prosenttiAluksiNolla() {
+        assertEquals(arpoja.getProsentti(), 0);
+    }
+
+    @Test
+    public void maaritaObjektiantaaYksiKunProsenttiAlle71() {
+        this.arpoja.setProsentti(55);
+        assertEquals(this.arpoja.maaritaObjekti(), 1);
+        this.arpoja.setProsentti(70);
+        assertEquals(this.arpoja.maaritaObjekti(), 1);
+    }
+
+    @Test
+    public void maaritaObjektiantaaKaksiKunProsenttiYli70JaAlle91() {
+        this.arpoja.setProsentti(71);
+        assertEquals(this.arpoja.maaritaObjekti(), 1);
+        this.arpoja.setProsentti(88);
+        assertEquals(this.arpoja.maaritaObjekti(), 1);
+        this.arpoja.setProsentti(90);
+        assertEquals(this.arpoja.maaritaObjekti(), 1);
+        this.arpoja.setProsentti(91);
+        assertEquals(this.arpoja.maaritaObjekti(), 3);
+    }
+    
 
     @Test
     public void onkoObjektinKoordinaattiAlussaNolla() {

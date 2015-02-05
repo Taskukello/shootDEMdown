@@ -16,6 +16,7 @@ import toiminta.pelaaja.Alus;
 import toiminta.pelaaja.Ammus;
 
 /**
+ * luokka on pelin toiminan ydin. kaiken olennaisen liikkumisen ylläpitämisen ja pisteiden ylläpitämisen
  *
  * @author Aki
  */
@@ -24,7 +25,7 @@ public class Logiikka {
     private ArrayList<VihollisObjekti> viholliset = new ArrayList<VihollisObjekti>();
     private ArrayList<VihollisObjekti> poistettavat = new ArrayList<VihollisObjekti>();
     private ArrayList<Ammus> poistettavatAmmukset = new ArrayList<Ammus>();
-    private ArrayList<Ammus> ammukset;
+    private ArrayList<Ammus> ammukset = new ArrayList<Ammus>();
     private Alus alus = new Alus();
     private int liikkumiskerrat = 40;
     private boolean kuoleekoPelaaja = true;
@@ -42,7 +43,11 @@ public class Logiikka {
         this.viivytysAika = 0;
     }
 
-    //-------------------------------------------------
+    /**
+     * viivyttää ohjelman toimintaa tarvitteasse kuten vuorojen välissä huomio.
+     * kriittinen (tuntemattomista syistä) metodi käyttöliittymän luomisen
+     * kannalta.
+     */
     public void viivyta() {
         if (viivytysAika > 0) {
             try {
@@ -53,21 +58,32 @@ public class Logiikka {
         }
     }
 
+    /**
+     * alustaa käyttöliittymän pelille huom! viivytysajan asettaminen tuhanteen
+     * on välttämätön muuten käyttliittymä sekoaa.
+     */
     public void valmisteleAlusta() {
         this.viivytysAika = 1000;                                   //voi olla konekohtainen ongelma mutta ilman tätä ohjelma hajoaa 
         viivyta();
         this.liittyma.setAlus(alus);
         this.liittyma.luoNappaimistonKuuntelija();
+        this.viivytysAika = 100;
     }
 
-    //-------------------------------------------------
+    /**
+     * Metodi aloittaa pelin, ja ylläpitää vuoroja. Tarkennus. Vuoro tarkoittaa
+     * tässä tapauksessa pelin vihollisen ja ammusten liikkumista.
+     */
     public void pelaa() {
-        this.viivytysAika = 100;
+
         while (kuoleekoPelaaja == true) {
             int k = this.liikkumiskerrat;
             luoBlokki();
             while (k >= 0) {
                 liikutaKaikkiaVihollisia();
+                liikutaKaikkiaAmmuksia();
+
+                liittymanPaivitys();
                 viivyta();
                 k--;
             }
@@ -75,7 +91,10 @@ public class Logiikka {
         System.out.println("Aluksesi tuhoutui!!");                                  //tämäkin kai katoaa
     }
 
-    //-------------------------------------------------
+    /**
+     * aloittaa uuden vuoron liikuttamalla jokaista olemassaolevaa vihollista
+     * kun ehdot täyttyvät.
+     */
     public void liikutaKaikkiaVihollisia() {
         int liikkumiset = 0;
         if (!this.viholliset.isEmpty()) {
@@ -86,18 +105,15 @@ public class Logiikka {
                     break;
                 }
             }
-            liikutaKaikkiaAmmuksia();
+            poistaVihollisia();
+
         }
 
-        poistaVihollisia();
-
-        liittymanPaivitys();
-
     }
-    
-  
-    //-------------------------------------------------
 
+    /**
+     * liikuttaa kaikkia olemassaolevia ammuksia ja tarpeentullen tuhoaa ne.
+     */
     public void liikutaKaikkiaAmmuksia() {
         this.ammukset = alus.getAmmukset();
         for (Ammus ammus : ammukset) {
@@ -111,8 +127,16 @@ public class Logiikka {
         alus.setAmmukset(ammukset);
 
     }
-    //-------------------------------------------------
 
+    /**
+     * tarkistaa koordinaattiin y=100 päässeen objektin, että törmääkö se
+     * alukseen
+     *
+     * @param objekti joka on saavuttanut koordinaatin Y= 100 Huom! tämä metodi
+     * vasta valmistelee itse tarkistuksen tarkistuksen itse suorittaa
+     * katsotaanpaOsumaTilannetta()
+     * @return palauttaa true jos objekti on osumassa alukseen.
+     */
     public boolean liikutaJaTarkistaKuolema(VihollisObjekti objekti) {
         OsumanTarkistaja tarkista = new OsumanTarkistaja(this.alus, objekti);
 
@@ -121,7 +145,9 @@ public class Logiikka {
         return katsotaanpaOsumaTilannetta(objekti, tarkista) == true;
     }
 
-    //-------------------------------------------------
+    /**
+     * vuoron loputtua päivittää käyttöliittymän senhtekiseen tilaan.
+     */
     public void liittymanPaivitys() {
         if (this.liittyma != null) {                                            //tämä if on puhtaasti testien takia.
             this.liittyma.setViholliset(this.viholliset);
@@ -130,13 +156,20 @@ public class Logiikka {
         }
     }
 
-    //---------------------------------------------------
+    /**
+     * Metodi tarkistaa ammuksen mahdollisen osuman verraten sen koordinaatteja
+     * olemassaoleviin vihollisobjekteihin Huom! tämä metodi toistaiseksi myös
+     * vastaa pisteiden lisäämisestä ja muusta mistä sen ei tulisi välittää
+     * Huom2! ylimääräiset turhakkeet tullaan siirtämään uuteen metodiin.
+     *
+     * @param ammus ammus joka saattaa osua vihollisobjektiin
+     */
     public void osuukoAmmus(Ammus ammus) {
         for (VihollisObjekti objekti : viholliset) {
             if (ammus.getY() == objekti.getY() - 20 || ammus.getY() < objekti.getY() && ammus.getY() > objekti.getY() - 20) {
                 int x = ammus.getX();
                 int objektix = objekti.getX();
-                if (x == objektix || x > objektix && x < objektix + 14) {
+                if (x == objektix || x > objektix && x < objektix + 20 || x < objektix && x + 5 > objektix) {
                     poistettavat.add(objekti);
                     poistettavatAmmukset.add(ammus);
                     pisteet++;
@@ -149,14 +182,28 @@ public class Logiikka {
         }
     }
 
+    /**
+     * kun pelaaja on tuhonnut kolme vihollista peli lisää vaikeutta
+     * vähentämällä liikkumiskertoja enne uuden vihollisen syntymistä Huom! jos
+     * objektit liikkuvat enään 16 kertaa vuorossa (max 40) ei peli enään
+     * vaikeudu
+     */
     public void lisaaVaikeutta() {
-        if (this.osumat == 3 && this.liikkumiskerrat > 16) {
+        if (this.osumat == 3 && this.liikkumiskerrat - 3 > 16) {
             this.liikkumiskerrat = this.liikkumiskerrat - 3;
             this.osumat = 0;
         }
     }
 
-    //---------------------------------------------------- 
+    /**
+     * tarkistaa osuuko vihollisobjekti alukseen ja määrittää annetaanko elämä
+     * vai otetaanko
+     *
+     * @param objekti objekti joka ehkä osuu
+     * @param tarkista luokka OsumanTarkistaja, joka kysyy onko objekti
+     * elämääantava vai ei
+     * @return palauttaa true jos alus on menettänyt jokaisen elämän.
+     */
     public boolean katsotaanpaOsumaTilannetta(VihollisObjekti objekti, OsumanTarkistaja tarkista) {
         int ox = objekti.getX();
         int ax = alus.getX();
@@ -183,7 +230,9 @@ public class Logiikka {
         return false;
     }
 
-    //-------------------------------------------------
+    /**
+     * arpoo millainen vihollisobjekti syntyy ja luo sen
+     */
     public void luoBlokki() {
         ObjektinArpoja arpoja = new ObjektinArpoja();
         VihollisObjekti objekti = new VihollisObjekti(arpoja.arvoObjekti(), arpoja.arvoKoordinaatti());
@@ -191,28 +240,37 @@ public class Logiikka {
 
     }
 
-    //-------------------------------------------------
-    public void setLiikkumisKerrat(int o) {
-        this.liikkumiskerrat = o;
-    }
-
+    /**
+     * lisää käyttöliittymään pisteet
+     */
     public void lisaaPistePaneeliin() {
-        this.liittyma.paivitaPistePalkki(pisteet);
+        if (this.liittyma != null) {
+
+            this.liittyma.paivitaPistePalkki(pisteet);
+        }
     }
 
-    //-------------------------------------------------
+    /**
+     * poistaa kuolleet viholliset pelistä.
+     */
     public void poistaVihollisia() {
         this.viholliset.removeAll(this.poistettavat);
         this.poistettavat.clear();
     }
 
-    //------------------------------------------------
+    /**
+     * poistaa tuhoutuneet ammukset pelistä
+     */
     public void poistaAmmuksia() {
         this.ammukset.removeAll(poistettavatAmmukset);
         this.poistettavatAmmukset.clear();
     }
 
-    //-------------------------------------------------
+    /**
+     * tarkistaa että saavuttaako elämät nollan jolloin peli loppuu
+     *
+     * @return true jos pelaaja kuolee
+     */
     public boolean loppuukoPeli() {
         if (this.alus.getElamat() == 0) {
             this.kuoleekoPelaaja = false;
@@ -220,6 +278,10 @@ public class Logiikka {
         } else {
             return false;
         }
+    }
+
+    public void setLiikkumisKerrat(int o) {
+        this.liikkumiskerrat = o;
     }
 
     //-------------------------------------------------
@@ -254,4 +316,26 @@ public class Logiikka {
     public void addVihollinen(VihollisObjekti objekti) {
         this.viholliset.add(objekti);
     }
+
+    public void setOsumat(int maara) {
+        this.osumat = maara;
+    }
+
+    public int getOsumat() {
+        return this.osumat;
+    }
+
+    public int getLiikkumisKerrat() {
+        return this.liikkumiskerrat;
+    }
+
+    public int getPisteet() {
+        return this.pisteet;
+    }
+
+    public ArrayList<Ammus> getAmmukset() {
+        return this.ammukset;
+
+    }
+
 }
