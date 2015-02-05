@@ -1,3 +1,2 @@
 # shootDEMdown
-maven projekti lisatty
-aihemaarittely ja tuntikirja lisatty
+ajan puutteesta johtuen pit hieman kesken, ja kayttoliittymassa ei viela ole javaDocia.
