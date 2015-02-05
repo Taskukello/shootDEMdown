@@ -1,2 +1,2 @@
 # shootDEMdown
-ajan puutteesta johtuen pit hieman kesken, ja kayttoliittymassa ei viela ole javaDocia.
+peli ''pelattavassa'' kunnossa bugeja... paljon bugeja.. ja paljon puuttuvaa sisältöä
