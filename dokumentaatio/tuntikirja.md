@@ -123,3 +123,19 @@ __________________________________________
 
 **kohde**:
 pelin alustavaan pelikuntoon laittaminen.
+
+__________________________________________
+**p‰iv‰m‰‰r‰**:4.2.2015
+
+**aika**:16.00-18.00
+
+**kohde**
+testien kattavuuden lis‰‰minen
+
+__________________________________________
+**p‰iv‰m‰‰r‰**:5.2.2015
+
+**aika**:15.18-17.16
+
+**kohde**
+testien lis‰‰minen ammus luokalle, javaDocin aloittaminen
