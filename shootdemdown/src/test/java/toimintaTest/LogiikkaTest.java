@@ -129,7 +129,7 @@ public class LogiikkaTest {
     public void osumaTilanteenTarkistajaPalkitseeElamallaKunKeraatOikeanBlokin() {
         this.logiikka = new Logiikka();
         objekti = new VihollisObjekti(3, 250);
-        objekti.setY(100);
+        objekti.setY(120);
 
         OsumanTarkistaja o = new OsumanTarkistaja(this.logiikka.getAlus(), objekti);
         this.logiikka.katsotaanpaOsumaTilannetta(objekti, o);
@@ -183,16 +183,16 @@ public class LogiikkaTest {
         this.logiikka.setOsumat(3);
         this.logiikka.lisaaVaikeutta();
         assertEquals(this.logiikka.getOsumat(), 0);
-        assertEquals(this.logiikka.getLiikkumisKerrat(), 37);
+        assertEquals(this.logiikka.getLiikkumisKerrat(), 39);
     }
 
     @Test
     public void lisaaVaikeuttaEiLisaaLiikaaVaikeutta() {
         this.logiikka.setOsumat(3);
-        this.logiikka.setLiikkumisKerrat(16);
+        this.logiikka.setLiikkumisKerrat(15);
         this.logiikka.lisaaVaikeutta();
-        assertEquals(this.logiikka.getOsumat(), 3);
-        assertEquals(this.logiikka.getLiikkumisKerrat(), 16);
+        assertEquals(this.logiikka.getOsumat(), 0);
+        assertEquals(this.logiikka.getLiikkumisKerrat(), 15);
     }
 
     @Test
@@ -207,9 +207,9 @@ public class LogiikkaTest {
     @Test
     public void sittenKunMutaatioTestitDerppaavatLisaaVaikeuttaMetdoin() {
         this.logiikka.setOsumat(3);
-        this.logiikka.setLiikkumisKerrat(18);
+        this.logiikka.setLiikkumisKerrat(17);
         this.logiikka.lisaaVaikeutta();
-        assertEquals(this.logiikka.getLiikkumisKerrat(), 18);
+        assertEquals(this.logiikka.getLiikkumisKerrat(), 17);
         assertEquals(this.logiikka.getOsumat(), 3);
         this.logiikka.setOsumat(3);
         this.logiikka.setLiikkumisKerrat(12);
@@ -259,7 +259,7 @@ public class LogiikkaTest {
         assertEquals(this.logiikka.getPisteet(), 1);
         assertEquals(this.logiikka.getOsumat(), 0);
         assertEquals(this.logiikka.getAlus().getAmmukset().size(), 0);
-        assertEquals(this.logiikka.getLiikkumisKerrat(), 37);
+        assertEquals(this.logiikka.getLiikkumisKerrat(), 39);
 
     }
 

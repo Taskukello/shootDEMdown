@@ -52,7 +52,7 @@ public class VihollisObjekti {
     /**
      * tarkistaa onko vihollisobjekti saavuttanut nollapisteen
      */
-    public boolean kuoleeko() {
+    public boolean kuoleekoSeinaan() {
         return this.y <= 0;
     }
     /**

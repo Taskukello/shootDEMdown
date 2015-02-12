@@ -5,6 +5,7 @@
  */
 package toiminta.pelaaja;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Frame;
 import java.awt.Graphics;
@@ -112,6 +113,19 @@ public class Alus {
         Ammus ammus = new Ammus();
         ammukset.add(ammus);
         ammus.piirra(graphics, this.x, this.y);
+    }
+    
+    public void piirraElamat(Graphics g){
+        int x = 20;
+        int y = 10;
+        int elamat = 0;
+        while (elamat < this.elamat){
+            g.setColor(Color.red);
+            g.fillOval(x, y, 20, 20);
+            x = x + 40;
+            elamat++;
+            
+        }
     }
 
     public ArrayList<Ammus> getAmmukset() {

@@ -39,7 +39,7 @@ public class PiirtoAlusta extends JPanel {
         if (this.viholliset != null) {
 
             alus.piirra(graphics);
-
+            alus.piirraElamat(graphics);
             for (VihollisObjekti objekti : viholliset) {
                 objekti.piirra(graphics);
 

@@ -54,6 +54,11 @@ public class Kayttoliittyma implements Runnable {
         frame.setVisible(true);
     }
 
+    /**
+     * luo ensimmäistä kertaa pelin alustan.
+     *
+     * @param container framen container
+     */
     public void luoKomponentit(Container container) {
 
         piirtoalusta = new PiirtoAlusta(this.viholliset, this.ammukset, alus);
@@ -62,6 +67,9 @@ public class Kayttoliittyma implements Runnable {
 
     }
 
+    /**
+     * päivittää käyttöliittymän kuvan pelaajalle.
+     */
     public void paivita() {
         piirtoalusta.setAlus(alus);
         piirtoalusta.setAmmukset(ammukset);
@@ -72,16 +80,29 @@ public class Kayttoliittyma implements Runnable {
         frame.setVisible(true);
     }
 
+    /**
+     * luo pelille luokan joka kuunteelee pelaajan näppäimistöä
+     */
     public void luoNappaimistonKuuntelija() {
         frame.addKeyListener(new NappaimistonKuuntelija(alus, piirtoalusta));
     }
 
+    /**
+     * luo peliin pistepalkin jonka alkuarvo on 0
+     *
+     * @param container framen juttujotain
+     */
     public void luoTietoPalkit(Container container) {
 
         container.add(areaNorth, BorderLayout.NORTH);
 
     }
 
+    /**
+     * päivittää pistepalkin pisteiden mukaiseksi
+     *
+     * @param o pisteiden määrä
+     */
     public void paivitaPistePalkki(int o) {
         StringBuilder sb = new StringBuilder();
         sb.append("");

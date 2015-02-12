@@ -16,7 +16,8 @@ import toiminta.pelaaja.Alus;
 import toiminta.pelaaja.Ammus;
 
 /**
- * luokka on pelin toiminan ydin. kaiken olennaisen liikkumisen ylläpitämisen ja pisteiden ylläpitämisen
+ * luokka on pelin toiminan ydin. kaiken olennaisen liikkumisen ylläpitämisen ja
+ * pisteiden ylläpitämisen
  *
  * @author Aki
  */
@@ -27,7 +28,7 @@ public class Logiikka {
     private ArrayList<Ammus> poistettavatAmmukset = new ArrayList<Ammus>();
     private ArrayList<Ammus> ammukset = new ArrayList<Ammus>();
     private Alus alus = new Alus();
-    private int liikkumiskerrat = 40;
+    private int liikkumiskerrat = 42;
     private boolean kuoleekoPelaaja = true;
     private Kayttoliittyma liittyma;
     private int viivytysAika = 100;
@@ -88,7 +89,7 @@ public class Logiikka {
                 k--;
             }
         }
-        System.out.println("Aluksesi tuhoutui!!");                                  //tämäkin kai katoaa
+
     }
 
     /**
@@ -185,12 +186,16 @@ public class Logiikka {
     /**
      * kun pelaaja on tuhonnut kolme vihollista peli lisää vaikeutta
      * vähentämällä liikkumiskertoja enne uuden vihollisen syntymistä Huom! jos
-     * objektit liikkuvat enään 16 kertaa vuorossa (max 40) ei peli enään
-     * vaikeudu
+     * objektit liikkuvat enään 15 kertaa vuorossa (max 42) ei peli enään vähennnä vuoroja
+     * Tämän jälkeen peli puolestaan aloittaa vähentämään vuorojen välistä viivytysaikaa.
      */
     public void lisaaVaikeutta() {
-        if (this.osumat == 3 && this.liikkumiskerrat - 3 > 16) {
+        if (this.osumat == 3 && this.liikkumiskerrat -3 > 14) {
             this.liikkumiskerrat = this.liikkumiskerrat - 3;
+            this.osumat = 0;
+        }
+        if (this.osumat == 3 && this.liikkumiskerrat == 15 && this.viivytysAika > 25) {
+            this.viivytysAika = this.viivytysAika - 5;
             this.osumat = 0;
         }
     }
@@ -208,7 +213,7 @@ public class Logiikka {
         int ox = objekti.getX();
         int ax = alus.getX();
 
-        if (objekti.getY() == 100) {
+        if (objekti.getY() == 120) {
             if (ox < ax && ox + objekti.getKoko() > ax || ox > ax && ox < ax + this.alus.getKoko() || ax == ox) {
                 tarkista.osuma();
                 this.poistettavat.add(objekti);
@@ -219,7 +224,7 @@ public class Logiikka {
             }
         }
 
-        if (objekti.kuoleeko() == true) {
+        if (objekti.kuoleekoSeinaan() == true) {
             poistettavat.add(objekti);
             alus.menetaElama();
             if (loppuukoPeli() == true) {
