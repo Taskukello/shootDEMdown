@@ -5,6 +5,8 @@
  */
 package toimintaTest.pelaajaTest;
 
+import javax.swing.SwingUtilities;
+import kayttoliittyma.Kayttoliittyma;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -22,14 +24,7 @@ public class AmmusTest {
     private Ammus ammus;
 
     public AmmusTest() {
-    }
 
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
     }
 
     @Before
@@ -63,14 +58,14 @@ public class AmmusTest {
         ammus.siirry();
         assertEquals(ammus.getY(), 120);
     }
-    
+
     @Test
-    public void getKokoAntaaOikeanArvon(){
+    public void getKokoAntaaOikeanArvon() {
         assertEquals(ammus.getKoko(), 6);
     }
-    
+
     @Test
-    public void eiSiirryLiikaa(){
+    public void eiSiirryLiikaa() {
         ammus.setY(700);
         ammus.siirry();
         assertEquals(ammus.getY(), 700);

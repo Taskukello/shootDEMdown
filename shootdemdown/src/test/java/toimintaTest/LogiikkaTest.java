@@ -26,41 +26,41 @@ import toiminta.vihollisobjekti.VihollisObjekti;
  * @author Aki
  */
 public class LogiikkaTest {
-
+    
     Kayttoliittyma kayttoliittyma = new Kayttoliittyma();
-
+    
     private Logiikka logiikka;
     private VihollisObjekti objekti;
-
+    
     public LogiikkaTest() {
-
+        
     }
-
+    
     @Before
     public void setUp() {
         SwingUtilities.invokeLater(kayttoliittyma);
         logiikka = new Logiikka(kayttoliittyma);
         this.logiikka.luoBlokki();
         objekti = new VihollisObjekti(1, 250);
-
+        
     }
-
+    
     @After
     public void tearDown() {
     }
-
+    
     @Test
     public void onkoVihollisiaAlussaNolla() {
         Logiikka j = new Logiikka(this.kayttoliittyma);
-
+        
         assertEquals(j.getVihollisetKoko(), 0);
     }
-
+    
     @Test
     public void onkoVihollisiaLisayksenJalkeenYksi() {
         assertEquals(logiikka.getVihollisetKoko(), 1);
     }
-
+    
     @Test(timeout = 2000)
     public void liikkuukoBlokkiYhden() {
         this.logiikka = new Logiikka();
@@ -68,30 +68,30 @@ public class LogiikkaTest {
         this.logiikka.setLiikkumisKerrat(1);
         this.logiikka.liikutaKaikkiaVihollisia();
         VihollisObjekti banaani = this.logiikka.getViholliset().get(0);
-
+        
         assertEquals(banaani.getY(), 698);
-
+        
     }
-
+    
     @Test
     public void vihollinenKuolee() {
-
+        
         this.logiikka.setPoistettavat(this.logiikka.getViholliset());
         this.logiikka.poistaVihollisia();
         assertEquals(this.logiikka.getVihollisetKoko(), 0);
     }
-
-    @Test (timeout = 3000)
+    
+    @Test(timeout = 6000)
     public void pelaaToimii() {
         
         this.logiikka.valmisteleAlusta();
-        this.logiikka.setViivytysAika(0);
+        this.logiikka.setOdotusAika(2);
         this.logiikka.pelaa();
         assertEquals(this.logiikka.getAlus().getElamat(), this.logiikka.getPoistettavat().size(), 0);
         assertEquals(this.logiikka.loppuukoPeli(), true);
-
+        
     }
-
+    
     @Test(timeout = 2000)
     public void liikutaKaikkiaPoistaaKuolevat() {
         this.logiikka = new Logiikka();
@@ -103,12 +103,12 @@ public class LogiikkaTest {
             this.logiikka.liikutaKaikkiaVihollisia();
             k++;
         }
-
+        
         assertEquals(this.logiikka.getViholliset().size(), 0);
         assertEquals(this.logiikka.getAlus().getElamat(), 2);
-
+        
     }
-
+    
     @Test(timeout = 2000)
     public void liikutaKaikkiaTappaaPelaajan() {
         this.logiikka = new Logiikka();
@@ -122,48 +122,48 @@ public class LogiikkaTest {
             k++;
         }
         assertEquals(this.logiikka.getAlus().getElamat(), 0);
-
+        
     }
-
+    
     @Test
     public void osumaTilanteenTarkistajaPalkitseeElamallaKunKeraatOikeanBlokin() {
         this.logiikka = new Logiikka();
         objekti = new VihollisObjekti(3, 250);
         objekti.setY(120);
-
+        
         OsumanTarkistaja o = new OsumanTarkistaja(this.logiikka.getAlus(), objekti);
         this.logiikka.katsotaanpaOsumaTilannetta(objekti, o);
         assertEquals(this.logiikka.getAlus().getElamat(), 4);
-
+        
     }
-
+    
     @Test(timeout = 1200)
     public void viivastysToimii() {
         this.logiikka.luoBlokki();
         this.logiikka.setViivytysAika(1000);
         this.logiikka.viivyta();
         assertTrue(true);
-
+        
     }
-
+    
     public void viivastysEiTeeMitaanJosArvoOnNolla() {
         this.logiikka.luoBlokki();
         this.logiikka.viivyta();
         assertTrue(true);
     }
-
+    
     @Test
     public void peliLoppuuToimii() {
         poistaElamia(3);
         assertEquals(this.logiikka.loppuukoPeli(), true);
         assertEquals(this.logiikka.getAlus().getElamat(), 0);
     }
-
+    
     @Test
     public void peliLoppuuToimiiLisays() {
         assertEquals(this.logiikka.loppuukoPeli(), false);
     }
-
+    
     public void poistaElamia(int maarat) {                                         //avustusmetodi vähentämään koodin toistoa
         int k = 0;
         while (k < maarat) {
@@ -171,54 +171,73 @@ public class LogiikkaTest {
             k++;
         }
     }
-
+    
     @Test
     public void lisaaObjektiToimii() {
         this.logiikka.addVihollinen(objekti);
         assertEquals(this.logiikka.getViholliset().size(), 2);
     }
-
+    
     @Test
     public void lisaaVaikeutta() {
         this.logiikka.setOsumat(3);
+        this.logiikka.setLiikkumisKerrat(23);
+        this.logiikka.setOdotusAika(22);
         this.logiikka.lisaaVaikeutta();
         assertEquals(this.logiikka.getOsumat(), 0);
-        assertEquals(this.logiikka.getLiikkumisKerrat(), 39);
+        assertEquals(this.logiikka.getLiikkumisKerrat(), 20);
+        assertEquals(this.logiikka.getOdotusAika(), 22);
+        
     }
-
+    
     @Test
     public void lisaaVaikeuttaEiLisaaLiikaaVaikeutta() {
         this.logiikka.setOsumat(3);
         this.logiikka.setLiikkumisKerrat(15);
         this.logiikka.lisaaVaikeutta();
-        assertEquals(this.logiikka.getOsumat(), 0);
+        assertEquals(this.logiikka.getOsumat(), 3);
         assertEquals(this.logiikka.getLiikkumisKerrat(), 15);
     }
-
+    
     @Test
     public void eiLisaileHuvikseenVaikeutta() {
         this.logiikka.setOsumat(2);
         this.logiikka.setLiikkumisKerrat(76);
+        this.logiikka.setOdotusAika(11);
         this.logiikka.lisaaVaikeutta();
         assertEquals(this.logiikka.getOsumat(), 2);
         assertEquals(this.logiikka.getLiikkumisKerrat(), 76);
+        assertEquals(this.logiikka.getOdotusAika(), 11);
     }
-
+    @Test
+    public void nopeusNouseeOikein(){
+        this.logiikka.setOsumat(2);
+        this.logiikka.setLiikkumisKerrat(42);
+        this.logiikka.setOdotusAika(24);
+        this.logiikka.lisaaVaikeutta();
+        assertEquals(this.logiikka.getOsumat(), 0);
+        assertEquals(this.logiikka.getLiikkumisKerrat(), 42);
+        assertEquals(this.logiikka.getOdotusAika(), 22);
+    }
+    
     @Test
     public void sittenKunMutaatioTestitDerppaavatLisaaVaikeuttaMetdoin() {
-        this.logiikka.setOsumat(3);
-        this.logiikka.setLiikkumisKerrat(17);
+        this.logiikka.setOsumat(2);
+        this.logiikka.setLiikkumisKerrat(42);
+        this.logiikka.setOdotusAika(2);
         this.logiikka.lisaaVaikeutta();
-        assertEquals(this.logiikka.getLiikkumisKerrat(), 17);
-        assertEquals(this.logiikka.getOsumat(), 3);
+        assertEquals(this.logiikka.getLiikkumisKerrat(), 42);
+        assertEquals(this.logiikka.getOdotusAika(), 2);
+        assertEquals(this.logiikka.getOsumat(), 2);
         this.logiikka.setOsumat(3);
-        this.logiikka.setLiikkumisKerrat(12);
+        this.logiikka.setLiikkumisKerrat(20);
+        this.logiikka.setOdotusAika(22);
         this.logiikka.lisaaVaikeutta();
-        assertEquals(this.logiikka.getLiikkumisKerrat(), 12);
+        assertEquals(this.logiikka.getLiikkumisKerrat(), 20);
         assertEquals(this.logiikka.getOsumat(), 3);
-
+        
     }
-
+    
     public Ammus jarjesteleValmiiksi(int x, int y, int vx, int vy) {
         this.logiikka = new Logiikka();
         this.objekti = new VihollisObjekti(1, vx);
@@ -229,40 +248,40 @@ public class LogiikkaTest {
         ammus.setY(y);
         return ammus;
     }
-
+    
     @Test
     public void josAmmusSuoraanXSaatPisteen() {
         Ammus ammus = jarjesteleValmiiksi(250, 200, 250, 220);
-
+        
         this.logiikka.osuukoAmmus(ammus);
         assertEquals(this.logiikka.getPisteet(), 1);
         assertEquals(this.logiikka.getOsumat(), 1);
-
+        
     }
-
+    
     @Test
     public void josAmmutKeskelleSaatPisteen() {
         Ammus ammus = jarjesteleValmiiksi(250, 200, 245, 215);
-
+        
         this.logiikka.osuukoAmmus(ammus);
         assertEquals(this.logiikka.getPisteet(), 1);
         assertEquals(this.logiikka.getOsumat(), 1);
-
+        
     }
-
+    
     @Test
     public void josAmmusMelkeinOhiSaatPisteenJaPeliVaikeutuu() {
         Ammus ammus = jarjesteleValmiiksi(250, 200, 231, 210);
         this.logiikka.setOsumat(2);
         this.logiikka.osuukoAmmus(ammus);
-
+        
         assertEquals(this.logiikka.getPisteet(), 1);
-        assertEquals(this.logiikka.getOsumat(), 0);
+        assertEquals(this.logiikka.getOsumat(), 3);
         assertEquals(this.logiikka.getAlus().getAmmukset().size(), 0);
-        assertEquals(this.logiikka.getLiikkumisKerrat(), 39);
-
+        assertEquals(this.logiikka.getLiikkumisKerrat(), 42);
+        
     }
-
+    
     @Test
     public void josAmmutMelkeinOhiVasemmaltaSaatPisteen() {
         Ammus ammus = jarjesteleValmiiksi(250, 200, 254, 205);
@@ -270,33 +289,33 @@ public class LogiikkaTest {
         this.logiikka.osuukoAmmus(ammus);
         assertEquals(this.logiikka.getPisteet(), 1);
         assertEquals(this.logiikka.getOsumat(), 4);
-
+        
     }
-
+    
     @Test
     public void ohimenoTilanteetEivatAnnaPisteita() {
         Ammus ammus = jarjesteleValmiiksi(250, 200, 255, 220);
         this.logiikka.osuukoAmmus(ammus);
         assertEquals(this.logiikka.getPisteet(), 0);
         assertEquals(this.logiikka.getOsumat(), 0);
-
+        
         ammus = jarjesteleValmiiksi(250, 200, 230, 220);
         this.logiikka.osuukoAmmus(ammus);
         assertEquals(this.logiikka.getPisteet(), 0);
         assertEquals(this.logiikka.getOsumat(), 0);
-
+        
         ammus = jarjesteleValmiiksi(250, 200, 230, 200);
         this.logiikka.osuukoAmmus(ammus);
         assertEquals(this.logiikka.getPisteet(), 0);
         assertEquals(this.logiikka.getOsumat(), 0);
-
+        
         ammus = jarjesteleValmiiksi(250, 200, 230, 221);
         this.logiikka.osuukoAmmus(ammus);
         assertEquals(this.logiikka.getPisteet(), 0);
         assertEquals(this.logiikka.getOsumat(), 0);
-
+        
     }
-
+    
     @Test
     public void ammmusLiikkuuOikein() {
         Ammus ammus = new Ammus();
@@ -306,19 +325,19 @@ public class LogiikkaTest {
         this.logiikka.liikutaKaikkiaAmmuksia();
         assertEquals(this.logiikka.getAmmukset().get(0).getY(), 110);
         assertEquals(this.logiikka.getAlus().getAmmukset().get(0).getY(), 110);
-
+        
     }
-
+    
     @Test
     public void ammusTuhoutuuKunOsuuKattoon() {
         Ammus ammus = new Ammus();
         ammus.setY(690);
         this.logiikka = new Logiikka();
         this.logiikka.getAlus().addAmmus(ammus);
-
+        
         this.logiikka.liikutaKaikkiaAmmuksia();
         assertEquals(this.logiikka.getAmmukset().size(), 0);
-
+        
     }
-
+    
 }

@@ -51,9 +51,10 @@ public class VihollisObjekti {
 
     /**
      * tarkistaa onko vihollisobjekti saavuttanut nollapisteen
+     * @return true jos objekti kuolee
      */
     public boolean kuoleekoSeinaan() {
-        return this.y <= 0;
+        return this.y -this.koko <= 0;
     }
     /**
      * piirtää/siirtää vihollisobjektin käyttöliittmällä

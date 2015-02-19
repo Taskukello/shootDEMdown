@@ -85,5 +85,15 @@ public class VihollisObjektiTest {
         this.objekti = new VihollisObjekti(4, 250);
         assertEquals(this.objekti.piirra(kayttoliittyma.getFrame().getGraphics()), false);
     }
+    
+    @Test
+    public void kuoleekoSeinaanToimii(){
+        this.objekti.setY(20);
+        assertEquals(this.objekti.kuoleekoSeinaan(), true);
+        this.objekti.setY(15);
+        assertEquals(this.objekti.kuoleekoSeinaan(), true);
+        this.objekti.setY(21);
+        assertEquals(this.objekti.kuoleekoSeinaan(), false);
+    }
 
 }

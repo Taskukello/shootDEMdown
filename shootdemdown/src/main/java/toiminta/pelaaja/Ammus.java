@@ -9,7 +9,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- *ylläpitää ammusta ja hoitaa sen koordinaatteja
+ * ylläpitää ammusta ja hoitaa sen koordinaatteja
+ *
  * @author Aki
  */
 public class Ammus {
@@ -44,20 +45,21 @@ public class Ammus {
             y = y + 10;
         }
     }
-/**
- * piirtää/siirtää ammusta käyttöliittymällä
- * @param graphics piirtoalustasta tuodut grafiikat
- * @param x -koordinaatti mistä ammus ammuttiin (ei muutu kun määritelty)
- * @param y -koordinaatti missä y koordinaatissa ammus tällä hetkin sijaitsee
- */
+
+    /**
+     * piirtää/siirtää ammusta käyttöliittymällä
+     *
+     * @param graphics piirtoalustasta tuodut grafiikat
+     * @param x -koordinaatti mistä ammus ammuttiin (ei muutu kun määritelty)
+     * @param y -koordinaatti missä y koordinaatissa ammus tällä hetkin
+     * sijaitsee
+     */
     public void piirra(Graphics graphics, int x, int y) {
-        if (x != -1) {
             this.x = x + 7;
             this.y = y;
-        }
+
         graphics.setColor(Color.ORANGE);
         graphics.fillRect(this.x, 700 - this.y, leveys, ammuksenPituus);
 
     }
-
 }

@@ -8,14 +8,12 @@ package kayttoliittyma;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Frame;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Image;
+import java.awt.Font;
+import java.awt.Label;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 import toiminta.vihollisobjekti.VihollisObjekti;
 import toiminta.pelaaja.Alus;
@@ -33,6 +31,7 @@ public class Kayttoliittyma implements Runnable {
     private ArrayList<Ammus> ammukset;
     private Alus alus;
     private PiirtoAlusta piirtoalusta;
+    private NappaimistonKuuntelija kuuntelija;
     private String pisteet = "0";
     private JLabel areaNorth = new JLabel(pisteet);
 
@@ -43,7 +42,7 @@ public class Kayttoliittyma implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Pelialusta");
-        frame.setPreferredSize(new Dimension(520, 700));
+        frame.setPreferredSize(new Dimension(535, 750));
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,7 +83,9 @@ public class Kayttoliittyma implements Runnable {
      * luo pelille luokan joka kuunteelee pelaajan näppäimistöä
      */
     public void luoNappaimistonKuuntelija() {
-        frame.addKeyListener(new NappaimistonKuuntelija(alus, piirtoalusta));
+        this.kuuntelija = new NappaimistonKuuntelija(alus, piirtoalusta);
+            frame.addKeyListener(this.kuuntelija);
+       
     }
 
     /**
@@ -95,6 +96,34 @@ public class Kayttoliittyma implements Runnable {
     public void luoTietoPalkit(Container container) {
 
         container.add(areaNorth, BorderLayout.NORTH);
+
+    }
+
+    /**
+     * kun pelaajan elämät loppuvat luo uuden näytön joka kysyy halutaanko
+     * pelata uudelleen ja näyttää pisteet.
+     *
+     * @param container framen container
+     */
+    public void luoLoppuNakyma(Container container) {
+        container.removeAll();
+        JLabel nimiTeksti = new JLabel("PELI LOPPUI!");
+        JLabel loppuPisteet = new JLabel("Pisteesi: " + this.pisteet);
+        JButton pelaaUudelleen = new JButton("Pelaa uudelleen!"); // tämä nappi ei tee vielä yhtään mitään.
+
+        Resetoija resetoija = new Resetoija(this.frame);
+        pelaaUudelleen.addActionListener(resetoija);
+
+        nimiTeksti.setFont(new Font("mitakohatassakipitaslukea", Font.BOLD, 50));
+        loppuPisteet.setFont(new Font("envielakaantieda", Font.PLAIN, 22));
+
+        container.add(nimiTeksti, BorderLayout.NORTH);
+        container.add(loppuPisteet, BorderLayout.CENTER);
+        container.add(pelaaUudelleen, BorderLayout.SOUTH);
+        container.repaint();
+
+        frame.pack();
+        frame.setVisible(true);
 
     }
 
@@ -126,6 +155,10 @@ public class Kayttoliittyma implements Runnable {
 
     public void setAmmukset(ArrayList<Ammus> a) {
         this.ammukset = a;
+    }
+
+    public NappaimistonKuuntelija getNappaimistonKuuntelija() {
+        return this.kuuntelija;
     }
 
 }

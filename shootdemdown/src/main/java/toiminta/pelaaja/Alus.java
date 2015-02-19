@@ -114,7 +114,11 @@ public class Alus {
         ammukset.add(ammus);
         ammus.piirra(graphics, this.x, this.y);
     }
-    
+
+    /**
+     * piirtää aluksen elämät näytölle
+     * @param g pelin grafiikat
+     */
     public void piirraElamat(Graphics g){
         int x = 20;
         int y = 10;

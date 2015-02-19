@@ -23,7 +23,8 @@ public class ObjektinArpoja {
     }
 
     /**
-     *arpoo millainen objekti on (tappava, vai parantava)
+     * arpoo millainen objekti on (tappava, vai parantava)
+     *
      * @return palauttaa mikä arvo on arvottu
      */
     public int arvoObjekti() {
@@ -31,25 +32,29 @@ public class ObjektinArpoja {
         maaritaObjekti();
         return this.objektinArvo;
     }
+
     /**
-     * määrittää millainen objekti on kyseessä
-     * tarkennus. 1 = tappava, 2 = bonuksen antava (ei olemassa vielä), 3 = parantava
+     * määrittää millainen objekti on kyseessä tarkennus. 1 = tappava, 2 =
+     * bonuksen antava (ei olemassa vielä), 3 = parantava
+     *
      * @return palauttaa objektin muodon
      */
     public int maaritaObjekti() {
         if (prosentti <= 70) {
             this.objektinArvo = 1;
         } else if (prosentti <= 90 && prosentti > 70) {
-            this.objektinArvo = 1;
+            this.objektinArvo = 2;
         } else {
-            this.objektinArvo = 3;                  //toistaiseksi ohjelma ei tulosta kolmatta vihollistyyppiä
+            this.objektinArvo = 3;
 
         }
         return this.objektinArvo;
 
     }
+
     /**
      * määrittää objektin aloituspisteen x akselilla
+     *
      * @return palauttaa x-koordinaatin
      */
     public int arvoKoordinaatti() {
@@ -58,8 +63,10 @@ public class ObjektinArpoja {
         return this.objektinKoordinaatti;
 
     }
+
     /**
      * hoitaa arvonnan
+     *
      * @param rajaArvo kertoo mikä on maksimiarvo arvottavalle arvolle
      * @return palauttaa arvotun arvon
      */

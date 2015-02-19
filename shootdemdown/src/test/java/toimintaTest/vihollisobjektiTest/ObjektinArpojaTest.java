@@ -74,11 +74,11 @@ public class ObjektinArpojaTest {
     @Test
     public void maaritaObjektiantaaKaksiKunProsenttiYli70JaAlle91() {
         this.arpoja.setProsentti(71);
-        assertEquals(this.arpoja.maaritaObjekti(), 1);
+        assertEquals(this.arpoja.maaritaObjekti(), 2);
         this.arpoja.setProsentti(88);
-        assertEquals(this.arpoja.maaritaObjekti(), 1);
+        assertEquals(this.arpoja.maaritaObjekti(), 2);
         this.arpoja.setProsentti(90);
-        assertEquals(this.arpoja.maaritaObjekti(), 1);
+        assertEquals(this.arpoja.maaritaObjekti(), 2);
         this.arpoja.setProsentti(91);
         assertEquals(this.arpoja.maaritaObjekti(), 3);
     }

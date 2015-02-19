@@ -34,6 +34,8 @@ public class Logiikka {
     private int viivytysAika = 100;
     private int pisteet = 0;
     private int osumat = 0;
+    private long liikuntaRajotin = 0;
+    private long odotusAika = 100;
 
     public Logiikka(Kayttoliittyma liittyma) {
         this.liittyma = liittyma;
@@ -81,15 +83,23 @@ public class Logiikka {
             int k = this.liikkumiskerrat;
             luoBlokki();
             while (k >= 0) {
-                liikutaKaikkiaVihollisia();
-                liikutaKaikkiaAmmuksia();
-
                 liittymanPaivitys();
-                viivyta();
-                k--;
+                if (System.currentTimeMillis() - this.liikuntaRajotin > this.odotusAika) {
+                    liikutaKaikkiaVihollisia();
+                    liikutaKaikkiaAmmuksia();
+                    k--;
+                    this.liikuntaRajotin = System.currentTimeMillis();
+                }
             }
         }
+        lopetaPeli();
 
+    }
+
+    public void lopetaPeli() {
+        this.ammukset.removeAll(ammukset);
+        this.viholliset.removeAll(ammukset);
+        this.liittyma.luoLoppuNakyma(this.liittyma.getFrame().getContentPane());
     }
 
     /**
@@ -186,18 +196,21 @@ public class Logiikka {
     /**
      * kun pelaaja on tuhonnut kolme vihollista peli lisää vaikeutta
      * vähentämällä liikkumiskertoja enne uuden vihollisen syntymistä Huom! jos
-     * objektit liikkuvat enään 15 kertaa vuorossa (max 42) ei peli enään vähennnä vuoroja
-     * Tämän jälkeen peli puolestaan aloittaa vähentämään vuorojen välistä viivytysaikaa.
+     * objektit liikkuvat enään 15 kertaa vuorossa (max 42) ei peli enään
+     * vähennnä vuoroja Tämän jälkeen peli puolestaan aloittaa vähentämään
+     * vuorojen välistä viivytysaikaa.
      */
     public void lisaaVaikeutta() {
-        if (this.osumat == 3 && this.liikkumiskerrat -3 > 14) {
+
+        if (this.osumat == 2 && this.liikkumiskerrat == 42 && this.odotusAika > 22) {
+            this.odotusAika = this.odotusAika - 2;
+            this.osumat = 0;
+        }
+        if (this.osumat == 3 && this.liikkumiskerrat - 3 >= 20 && this.odotusAika == 22) {
             this.liikkumiskerrat = this.liikkumiskerrat - 3;
             this.osumat = 0;
         }
-        if (this.osumat == 3 && this.liikkumiskerrat == 15 && this.viivytysAika > 25) {
-            this.viivytysAika = this.viivytysAika - 5;
-            this.osumat = 0;
-        }
+
     }
 
     /**
@@ -215,7 +228,10 @@ public class Logiikka {
 
         if (objekti.getY() == 120) {
             if (ox < ax && ox + objekti.getKoko() > ax || ox > ax && ox < ax + this.alus.getKoko() || ax == ox) {
-                tarkista.osuma();
+                int k = tarkista.osuma();
+                if (k == 2) {
+                    lyhennaAmmuksenAmmuntaAikaa();
+                }
                 this.poistettavat.add(objekti);
 
                 if (loppuukoPeli() == true) {
@@ -243,6 +259,17 @@ public class Logiikka {
         VihollisObjekti objekti = new VihollisObjekti(arpoja.arvoObjekti(), arpoja.arvoKoordinaatti());
         viholliset.add(objekti);
 
+    }
+
+    /**
+     * nopeuttaa ammusten laukasunopeutta kunnes rajotin on 100
+     */
+    public void lyhennaAmmuksenAmmuntaAikaa() {
+        Long jokuHauskaNimi = this.liittyma.getNappaimistonKuuntelija().getAmmusRajotin();
+        if (jokuHauskaNimi - 25 >= 100) {
+            this.liittyma.getNappaimistonKuuntelija().setAmmusRajotin(jokuHauskaNimi - 25);
+
+        }
     }
 
     /**
@@ -341,6 +368,14 @@ public class Logiikka {
     public ArrayList<Ammus> getAmmukset() {
         return this.ammukset;
 
+    }
+
+    public long getOdotusAika() {
+        return odotusAika;
+    }
+
+    public void setOdotusAika(long odotus) {
+        this.odotusAika = odotus;
     }
 
 }
