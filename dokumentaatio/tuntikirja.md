@@ -139,3 +139,12 @@ __________________________________________
 
 **kohde**
 testien lisääminen ammus luokalle, javaDocin aloittaminen
+
+__________________________________________
+**päivämäärä**:9.2.2015-19.2.2015
+
+**aika**:--;
+
+**kohde**
+henkilökohtaisista syistä en ole kyennyt tekemään tuntikirjaa ja ohjelmaa itsekkin juuri sen verran että se on
+edistynyt. Kahden viimeisen viikon aikana bugeja korjattu, peliä balansoitu, ja käyttöliittymää paranneltu
