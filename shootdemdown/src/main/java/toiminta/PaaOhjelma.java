@@ -12,7 +12,7 @@ import toiminta.pelaaja.Alus;
 import toiminta.vihollisobjekti.VihollisObjekti;
 
 /**
- *
+ *aloittaa pelin
  * @author Aki
  */
 public class PaaOhjelma {

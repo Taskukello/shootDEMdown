@@ -16,6 +16,7 @@ import java.util.ArrayList;
 /**
  * ylläpitää aluksen liikettä sen kuntoa. hoitaa ammuksia
  * @author Aki
+ * -
  */
 public class Alus {
 

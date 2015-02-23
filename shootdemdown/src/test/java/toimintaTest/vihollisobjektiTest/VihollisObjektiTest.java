@@ -17,7 +17,7 @@ import toiminta.pelaaja.Alus;
 import toiminta.vihollisobjekti.VihollisObjekti;
 
 /**
- *
+ *testaa vihollisluokan
  * @author Aki
  */
 public class VihollisObjektiTest {

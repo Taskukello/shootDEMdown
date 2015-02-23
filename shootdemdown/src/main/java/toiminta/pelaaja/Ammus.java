@@ -10,7 +10,7 @@ import java.awt.Graphics;
 
 /**
  * ylläpitää ammusta ja hoitaa sen koordinaatteja
- *
+ *-
  * @author Aki
  */
 public class Ammus {

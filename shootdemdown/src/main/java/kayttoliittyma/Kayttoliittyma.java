@@ -20,7 +20,7 @@ import toiminta.pelaaja.Alus;
 import toiminta.pelaaja.Ammus;
 
 /**
- *
+ *ylläpitää käyttöliittymää
  * @author Aki
  */
 public class Kayttoliittyma implements Runnable {

@@ -11,7 +11,7 @@ import toiminta.pelaaja.Alus;
 /**
  * tarkistelee osumatilanteen objektin ja aluksen välillä, luokka on vielä hyvin
  * tyhjä mutta täyttyy jatkossa
- *
+ *-
  * @author Aki
  */
 public class OsumanTarkistaja {

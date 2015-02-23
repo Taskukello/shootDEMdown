@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 import toiminta.vihollisobjekti.ObjektinArpoja;
 
 /**
- *
+ *testaa arvonta luokan
  * @author Aki
  */
 public class ObjektinArpojaTest {

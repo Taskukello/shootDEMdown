@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 import toiminta.pelaaja.Alus;
 
 /**
- *
+ *testaa Alus luokan
  * @author Aki
  */
 public class AlusTest {

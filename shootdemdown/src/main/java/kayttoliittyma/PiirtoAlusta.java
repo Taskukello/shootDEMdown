@@ -15,7 +15,7 @@ import toiminta.pelaaja.Alus;
 import toiminta.pelaaja.Ammus;
 
 /**
- *
+ *piirtää alustan ja hallitsee sitä
  * @author Aki
  */
 public class PiirtoAlusta extends JPanel {

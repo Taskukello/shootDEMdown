@@ -22,7 +22,7 @@ import toiminta.pelaaja.Ammus;
 import toiminta.vihollisobjekti.VihollisObjekti;
 
 /**
- *
+ *testaa logiikkaluokan
  * @author Aki
  */
 public class LogiikkaTest {

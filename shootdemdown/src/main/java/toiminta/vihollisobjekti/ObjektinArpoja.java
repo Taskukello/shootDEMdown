@@ -9,7 +9,7 @@ import java.util.Random;
 
 /**
  * hoitaa objektin luomisen edeltävät vaiheet
- *
+ *-
  * @author Aki
  */
 public class ObjektinArpoja {

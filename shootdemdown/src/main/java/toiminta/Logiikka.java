@@ -18,7 +18,7 @@ import toiminta.pelaaja.Ammus;
 /**
  * luokka on pelin toiminan ydin. kaiken olennaisen liikkumisen ylläpitämisen ja
  * pisteiden ylläpitämisen
- *
+ *-
  * @author Aki
  */
 public class Logiikka {

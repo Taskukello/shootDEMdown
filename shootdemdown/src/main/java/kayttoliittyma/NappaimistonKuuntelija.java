@@ -19,7 +19,7 @@ import java.util.Set;
 import toiminta.pelaaja.Alus;
 
 /**
- *
+ *kuuntelee nappaimistoa
  * @author Aki
  */
 public class NappaimistonKuuntelija implements KeyListener {

@@ -13,7 +13,7 @@ import javax.swing.SwingUtilities;
 import toiminta.Logiikka;
 
 /**
- *
+ *resetoi pelin
  * @author Aki
  */
 public class Resetoija implements ActionListener {

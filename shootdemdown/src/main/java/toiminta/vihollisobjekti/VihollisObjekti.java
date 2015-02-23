@@ -10,7 +10,7 @@ import java.awt.Graphics;
 
 /**
  * ylläpitää vihollisobjektia
- *
+ *-
  * @author Aki
  */
 public class VihollisObjekti {
