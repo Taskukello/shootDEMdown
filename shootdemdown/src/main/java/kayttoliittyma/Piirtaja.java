@@ -12,7 +12,7 @@ import toiminta.pelaaja.Ammus;
 import toiminta.vihollisobjekti.VihollisObjekti;
 
 /**
- *
+ *jrihj
  * @author Aki
  */
 public class Piirtaja {
