@@ -56,30 +56,7 @@ public class VihollisObjekti {
     public boolean kuoleekoSeinaan() {
         return this.y -this.koko <= 0;
     }
-    /**
-     * piirtää/siirtää vihollisobjektin käyttöliittmällä
-     * @param graphics tulee piirtoalustasta
-     * @return true jos objektin saa luotua. 
-     * Huom!. return arvo on testien takia.
-     */
-    public boolean piirra(Graphics graphics) {
-        if (this.muoto == 1) {
-            graphics.setColor(Color.BLACK);
-            graphics.fillOval(x, 700 - y, koko, koko);
-            return true;
-        } else if (this.muoto == 2) {
-            graphics.setColor(Color.BLUE);
-            graphics.fillRect(x, 700 - y, koko, koko);
-            return true;
-        } else if (this.muoto == 3) {
-            graphics.setColor(Color.RED);
-            graphics.fillRect(x, 700 - y, koko, koko);
-            return true;
-        } else {
-            return false;
-        }
 
-    }
 
     public void setKoko(int koko) {
         this.koko = koko;

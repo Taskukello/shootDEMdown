@@ -66,14 +66,8 @@ public class Alus {
     public int getElamat() {
         return elamat;
     }
-/**
- * piirtää aluksen käyttöliittymälle/ päivittää aluksen käyttöliittymälle
- * @param graphics eh... piirtoalusta lähettää grafiikat...?
- */
-    public void piirra(Graphics graphics) {
-        graphics.fillRect(x, 600, koko, koko);
 
-    }
+
 /**
  * muuttaa aluksen koordinaatteja kun nuolinappeja painetaan
  * @param x kuinka paljon alus siirtyy/ mihin suuntaan 
@@ -115,22 +109,7 @@ public class Alus {
         ammus.piirra(graphics, this.x, this.y);
     }
 
-    /**
-     * piirtää aluksen elämät näytölle
-     * @param g pelin grafiikat
-     */
-    public void piirraElamat(Graphics g){
-        int x = 20;
-        int y = 10;
-        int elamat = 0;
-        while (elamat < this.elamat){
-            g.setColor(Color.red);
-            g.fillOval(x, y, 20, 20);
-            x = x + 40;
-            elamat++;
-            
-        }
-    }
+
 
     public ArrayList<Ammus> getAmmukset() {
         return this.ammukset;

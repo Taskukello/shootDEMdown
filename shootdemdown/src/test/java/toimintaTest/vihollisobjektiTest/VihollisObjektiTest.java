@@ -26,7 +26,7 @@ public class VihollisObjektiTest {
     private VihollisObjekti objekti;
 
     public VihollisObjektiTest() {
-        
+
         objekti = new VihollisObjekti(3, 14);
     }
 
@@ -73,21 +73,7 @@ public class VihollisObjektiTest {
     }
 
     @Test
-    public void objektinLaittoToimii() {
-        SwingUtilities.invokeLater(kayttoliittyma);
-        this.kayttoliittyma.setAlus(new Alus());
-        this.kayttoliittyma.run();
-        assertEquals(this.objekti.piirra(kayttoliittyma.getFrame().getGraphics()), true);
-        this.objekti = new VihollisObjekti(2, 250);
-        assertEquals(this.objekti.piirra(kayttoliittyma.getFrame().getGraphics()), true);
-        this.objekti = new VihollisObjekti(3, 250);
-        assertEquals(this.objekti.piirra(kayttoliittyma.getFrame().getGraphics()), true);
-        this.objekti = new VihollisObjekti(4, 250);
-        assertEquals(this.objekti.piirra(kayttoliittyma.getFrame().getGraphics()), false);
-    }
-    
-    @Test
-    public void kuoleekoSeinaanToimii(){
+    public void kuoleekoSeinaanToimii() {
         this.objekti.setY(20);
         assertEquals(this.objekti.kuoleekoSeinaan(), true);
         this.objekti.setY(15);

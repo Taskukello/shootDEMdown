@@ -43,8 +43,6 @@ public class NappaimistonKuuntelija implements KeyListener {
 
     }
 
-
-
     @Override
     public void keyPressed(KeyEvent ke) {
         if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
@@ -65,9 +63,9 @@ public class NappaimistonKuuntelija implements KeyListener {
             if (oikea == true) {
                 ammutaanko();
                 alus.siirry(10);
-            } else {
-                ammutaanko();
             }
+
+            ammutaanko();
 
         }
         if (space == false) {
@@ -98,16 +96,16 @@ public class NappaimistonKuuntelija implements KeyListener {
     @Override
     public void keyReleased(KeyEvent ke) {
 
-            if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
-                vasen = false;
-            }
-            if (ke.getKeyCode() == KeyEvent.VK_SPACE) {
-                space = false;
-            }
-            if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
-                oikea = false;
-            }
-        
+        if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
+            vasen = false;
+        }
+        if (ke.getKeyCode() == KeyEvent.VK_SPACE) {
+            space = false;
+        }
+        if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
+            oikea = false;
+        }
+
     }
 
     public Long getAmmusRajotin() {

@@ -19,47 +19,49 @@ import toiminta.pelaaja.Ammus;
  * @author Aki
  */
 public class PiirtoAlusta extends JPanel {
-
+    
     private Alus alus;
     private ArrayList<VihollisObjekti> viholliset;
     private ArrayList<Ammus> ammukset;
-
+    
     public PiirtoAlusta(ArrayList<VihollisObjekti> v, ArrayList<Ammus> ammus, Alus alus) {
         super.setBackground(Color.WHITE);
         this.ammukset = ammus;
         this.viholliset = v;
         this.alus = alus;
-
+        
     }
-
+    
     @Override
     protected void paintComponent(Graphics graphics) {
-
+        Piirtaja piirtaja = new Piirtaja(graphics);
         super.paintComponent(graphics);
         if (this.viholliset != null) {
-
-            alus.piirra(graphics);
-            alus.piirraElamat(graphics);
+            
+            piirtaja.piirraAlus(alus);
+            piirtaja.piirraElamat(alus);
             for (VihollisObjekti objekti : viholliset) {
-                objekti.piirra(graphics);
-
+                piirtaja.piirraVihollisObjektit(objekti);
+                
             }
             for (Ammus ammus : ammukset) {
-                ammus.piirra(graphics, -1, -1);
+                piirtaja.piirraAmmus(-1, -1, ammus);
             }
-
+            
         }
+        
+    }
 
-    }public void setViholliset(ArrayList<VihollisObjekti> o){
+    public void setViholliset(ArrayList<VihollisObjekti> o) {
         this.viholliset = o;
     }
     
-    public void setAlus(Alus a){
+    public void setAlus(Alus a) {
         this.alus = a;
     }
     
-    public void setAmmukset(ArrayList<Ammus> a){
+    public void setAmmukset(ArrayList<Ammus> a) {
         this.ammukset = a;
     }
-
+    
 }
