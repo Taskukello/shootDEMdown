@@ -19,7 +19,8 @@ import java.util.Set;
 import toiminta.pelaaja.Alus;
 
 /**
- *kuuntelee nappaimistoa
+ * kuuntelee nappaimistoa
+ *
  * @author Aki
  */
 public class NappaimistonKuuntelija implements KeyListener {
@@ -28,9 +29,9 @@ public class NappaimistonKuuntelija implements KeyListener {
     private Component component;
     private long odotusaika = 0;
     private long ammusrajoitin = 500;
-    boolean vasen = false;
-    boolean oikea = false;
-    boolean space = false;
+    private boolean vasen = false;
+    private boolean oikea = false;
+    private boolean space = false;
 
     public NappaimistonKuuntelija(Alus alus, Component c) {
         this.alus = alus;
@@ -83,6 +84,7 @@ public class NappaimistonKuuntelija implements KeyListener {
     /**
      * avustaa metodia keyPressed() ampunmalla ammuksen HUOM! ammusta ei ammuta
      * jos ajat eivät täsmää
+     *
      */
     public void ammutaanko() {
         Piirtaja piirtaja = new Piirtaja(component.getGraphics());

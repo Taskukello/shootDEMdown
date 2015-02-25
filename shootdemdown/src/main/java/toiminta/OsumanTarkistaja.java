@@ -27,6 +27,7 @@ public class OsumanTarkistaja {
     /**
      * tarkistaa millainen vihollinen on osunut alukseen elämää antava vai
      * tappava
+     * @return palauttaa 1 jos alus menettää elämän, 3 jos saa elämän, 2 jos kumpikaan ei toteudu
      */
     public int osuma() {
         if (this.objekti.getMuoto() == 1) {

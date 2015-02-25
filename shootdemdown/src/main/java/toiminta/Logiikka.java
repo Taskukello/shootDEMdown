@@ -74,11 +74,6 @@ public class Logiikka {
 
     }
 
-    public void valmisteleUusiPeli() {
-        this.liittyma.setAlus(alus);
-
-    }
-
     /**
      * Metodi aloittaa pelin, ja ylläpitää vuoroja. Tarkennus. Vuoro tarkoittaa
      * tässä tapauksessa pelin vihollisen ja ammusten liikkumista.
@@ -101,7 +96,9 @@ public class Logiikka {
         lopetaPeli();
 
     }
-
+/**
+ * lopettaa pelin ja antaa käyttöliittymälle komennon tuottaa loppunäkymän
+ */
     public void lopetaPeli() {
         this.ammukset.removeAll(ammukset);
         this.viholliset.removeAll(ammukset);
@@ -132,7 +129,7 @@ public class Logiikka {
      * liikuttaa kaikkia olemassaolevia ammuksia ja tarpeentullen tuhoaa ne.
      */
     public void liikutaKaikkiaAmmuksia() {
-     //   this.ammukset = alus.getAmmukset();
+      this.ammukset = alus.getAmmukset();
         for (Ammus ammus : ammukset) {
             ammus.siirry();
             osuukoAmmus(ammus);
@@ -141,7 +138,7 @@ public class Logiikka {
             }
         }
         poistaAmmuksia();
-      //  alus.setAmmukset(ammukset);
+        alus.setAmmukset(ammukset);
 
     }
 
@@ -374,7 +371,10 @@ public class Logiikka {
     public ArrayList<VihollisObjekti> getPoistettavat() {
         return this.poistettavat;
     }
-
+/**
+ * lisää halutun vihollisen vihollis listalle
+ * @param objekti haluttu vihollisobjekti.
+ */
     public void addVihollinen(VihollisObjekti objekti) {
         this.viholliset.add(objekti);
     }

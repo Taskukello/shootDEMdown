@@ -28,7 +28,7 @@ public class ObjektinArpoja {
     }
 
     /**
-     * arpoo millainen objekti on (tappava, vai parantava)
+     * arpoo millainen objekti on (tappava, parantava, vai ammusnopeutta parantava)
      *
      * @return palauttaa mikä arvo on arvottu
      */
@@ -47,7 +47,7 @@ public class ObjektinArpoja {
 
     /**
      * määrittää millainen objekti on kyseessä tarkennus. 1 = tappava, 2 =
-     * bonuksen antava (ei olemassa vielä), 3 = parantava
+     * bonuksen antava, 3 = parantava
      *
      * @return palauttaa objektin muodon
      */

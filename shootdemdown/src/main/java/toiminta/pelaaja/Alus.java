@@ -104,7 +104,7 @@ public class Alus {
         return this.koko;
     }
 
-    /*
+    
      public ArrayList<Ammus> getAmmukset() {
      return this.ammukset;
      }
@@ -116,5 +116,5 @@ public class Alus {
      public void addAmmus(Ammus ammus) {
      this.ammukset.add(ammus);
      }
-     */
+     
 }

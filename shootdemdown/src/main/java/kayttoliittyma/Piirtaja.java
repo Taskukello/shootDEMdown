@@ -108,7 +108,7 @@ public class Piirtaja {
     }
 
     /**
-     * piirtää ammuksia
+     * piirtää ammuksen ensimmäisen kerran
      *
      * @param graphics grafiikat
      * @param alus pelaajan alus
