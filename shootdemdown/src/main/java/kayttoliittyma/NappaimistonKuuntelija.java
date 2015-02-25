@@ -85,9 +85,9 @@ public class NappaimistonKuuntelija implements KeyListener {
      * jos ajat eivät täsmää
      */
     public void ammutaanko() {
-
+        Piirtaja piirtaja = new Piirtaja(component.getGraphics());
         if (System.currentTimeMillis() - this.odotusaika > this.ammusrajoitin) {
-            alus.luoAmmus(component.getGraphics());
+            piirtaja.luoAmmus(component.getGraphics(), this.alus);
             this.odotusaika = System.currentTimeMillis();
         }
 

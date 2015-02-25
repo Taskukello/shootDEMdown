@@ -8,8 +8,8 @@ package toiminta.vihollisobjekti;
 import java.util.Random;
 
 /**
- * hoitaa objektin luomisen edeltävät vaiheet
- *-
+ * hoitaa objektin luomisen edeltävät vaiheet -
+ *
  * @author Aki
  */
 public class ObjektinArpoja {
@@ -17,9 +17,14 @@ public class ObjektinArpoja {
     private int objektinArvo = 0;
     private int objektinKoordinaatti = 0;
     private int prosentti = 0;
+    private boolean kumpiArpoja;
 
     public ObjektinArpoja() {
 
+    }
+
+    public ObjektinArpoja(boolean arvo) {
+        kumpiArpoja = arvo;
     }
 
     /**
@@ -29,8 +34,15 @@ public class ObjektinArpoja {
      */
     public int arvoObjekti() {
         prosentti = arpaKone(100);
-        maaritaObjekti();
-        return this.objektinArvo;
+        if (kumpiArpoja == false) {
+            maaritaObjekti();
+            return this.objektinArvo;
+        } else if (kumpiArpoja == true) {
+            maaritaObjekttiKunSynnyttanytMontaVihollista();
+            return this.objektinArvo;
+        }
+        return 0;
+
     }
 
     /**
@@ -47,6 +59,22 @@ public class ObjektinArpoja {
         } else {
             this.objektinArvo = 3;
 
+        }
+        return this.objektinArvo;
+
+    }
+
+    /**
+     * määrittää millainen objekti on kyseessä KUN peli on synnyttänyt 5
+     * vihollista putkeen
+     *
+     * @return vihollisen muoto
+     */
+    public int maaritaObjekttiKunSynnyttanytMontaVihollista() {
+        if (prosentti < 50) {
+            this.objektinArvo = 2;
+        } else if (prosentti >= 50) {
+            this.objektinArvo = 3;
         }
         return this.objektinArvo;
 

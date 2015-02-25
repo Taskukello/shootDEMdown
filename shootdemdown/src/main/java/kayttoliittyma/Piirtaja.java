@@ -12,7 +12,8 @@ import toiminta.pelaaja.Ammus;
 import toiminta.vihollisobjekti.VihollisObjekti;
 
 /**
- *piirtaa objektit pelikentälle
+ * piirtaa objektit pelikentälle
+ *
  * @author Aki
  */
 public class Piirtaja {
@@ -53,6 +54,7 @@ public class Piirtaja {
      */
     public void piirraAlus(Alus alus) {
         graffat.fillRect(alus.getX(), 600, alus.getKoko(), alus.getKoko());
+       
     }
 
     /**
@@ -85,11 +87,45 @@ public class Piirtaja {
             graffat.fillOval(objekti.getX(), 700 - objekti.getY(), objekti.getKoko(), objekti.getKoko());
         } else if (objekti.getMuoto() == 2) {
             graffat.setColor(Color.BLUE);
-            graffat.fillOval(objekti.getX(), 700 - objekti.getY(), objekti.getKoko(), objekti.getKoko());
+            graffat.fillRect(objekti.getX(), 700 - objekti.getY(), objekti.getKoko(), objekti.getKoko());
         } else if (objekti.getMuoto() == 3) {
             graffat.setColor(Color.RED);
-            graffat.fillOval(objekti.getX(), 700 - objekti.getY(), objekti.getKoko(), objekti.getKoko());
+            graffat.fillRect(objekti.getX(), 700 - objekti.getY(), objekti.getKoko(), objekti.getKoko());
         }
 
     }
+
+    /**
+     * luo ammuksen kun nappainta Space painettu.
+     *
+     * @param graphics piirtoalustan lähettämät grafiikat tai jotain....
+     * @param alus pelaajan alus
+     */
+    public void luoAmmus(Graphics graphics, Alus alus) {
+        Ammus a = new Ammus();
+        alus.addAmmus(a);
+        piirraAmmusEnsimmaisenKerran(graphics, alus, a);
+    }
+
+    /**
+     * piirtää ammuksia
+     *
+     * @param graphics grafiikat
+     * @param alus pelaajan alus
+     * @param ammus itse ammus
+     */
+    public void piirraAmmusEnsimmaisenKerran(Graphics graphics, Alus alus, Ammus ammus) {
+        int alkuX = 0;
+        int alkuY = 0;
+        if (alus.getX() != -1) {
+            alkuX = alus.getX() + 7;
+            alkuY = alus.getY();
+            ammus.setX(alkuX);
+            ammus.setY(alkuY);
+        }
+        graphics.setColor(Color.ORANGE);
+        graphics.fillRect(alkuX, 700 - alkuY, ammus.getLeveys(), ammus.getKorkeus());
+
+    }
+
 }

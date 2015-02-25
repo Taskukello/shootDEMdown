@@ -125,6 +125,8 @@ public class LogiikkaTest {
         
     }
     
+    
+    
     @Test
     public void osumaTilanteenTarkistajaPalkitseeElamallaKunKeraatOikeanBlokin() {
         this.logiikka = new Logiikka();
@@ -136,6 +138,57 @@ public class LogiikkaTest {
         assertEquals(this.logiikka.getAlus().getElamat(), 4);
         
     }
+    
+    @Test
+    public void osumantarkistajaEiToimiRajaArvoilla(){
+        this.logiikka = new Logiikka();
+        objekti = new VihollisObjekti(1, 250);
+        objekti.setY(121);
+        OsumanTarkistaja o = new OsumanTarkistaja(this.logiikka.getAlus(), objekti);
+        logiikka.katsotaanpaOsumaTilannetta(objekti, o);
+        assertEquals(this.logiikka.getAlus().getElamat(), 3);
+        this.logiikka = new Logiikka();
+        objekti.setY(80);
+        o = new OsumanTarkistaja(this.logiikka.getAlus(), objekti);
+        logiikka.katsotaanpaOsumaTilannetta(objekti, o);
+        assertEquals(this.logiikka.getAlus().getElamat(), 3);
+    }
+    
+    @Test
+    public void osumantarkistajaToimiiRajojenSisalla(){
+        this.logiikka = new Logiikka();
+        objekti = new VihollisObjekti(1, 250);
+        objekti.setY(120);
+        OsumanTarkistaja o = new OsumanTarkistaja(this.logiikka.getAlus(), objekti);
+        logiikka.katsotaanpaOsumaTilannetta(objekti, o);
+        assertEquals(this.logiikka.getAlus().getElamat(), 2);
+        this.logiikka = new Logiikka();
+        objekti = new VihollisObjekti(1, 250);
+        objekti.setY(81);
+         o = new OsumanTarkistaja(this.logiikka.getAlus(), objekti);
+        logiikka.katsotaanpaOsumaTilannetta(objekti, o);
+        assertEquals(this.logiikka.getAlus().getElamat(), 2);
+        
+    }
+    
+    @Test
+    public void osumantarkistajaToimiiXrajaArvoilla(){
+        this.logiikka = new Logiikka();
+        objekti = new VihollisObjekti(1, 229);
+        objekti.setY(120);
+        OsumanTarkistaja o = new OsumanTarkistaja(this.logiikka.getAlus(), objekti);
+        logiikka.katsotaanpaOsumaTilannetta(objekti, o);
+        assertEquals(this.logiikka.getAlus().getElamat(), 3);
+        this.logiikka = new Logiikka();
+        objekti = new VihollisObjekti(1, 271);
+        objekti.setY(120);
+        o = new OsumanTarkistaja(this.logiikka.getAlus(), objekti);
+        logiikka.katsotaanpaOsumaTilannetta(objekti, o);
+        assertEquals(this.logiikka.getAlus().getElamat(), 3);
+        
+    }
+    
+    
     
     @Test(timeout = 1200)
     public void viivastysToimii() {
@@ -339,5 +392,35 @@ public class LogiikkaTest {
         assertEquals(this.logiikka.getAmmukset().size(), 0);
         
     }
+    
+    @Test
+    public void erikoisVihollisenArvoOnAluksiNolla(){
+        this.logiikka = new Logiikka();
+        assertEquals(this.logiikka.getErikoisVihollinen(), 0);
+    }
+    
+    @Test
+    public void objektiArpojaMeneeOikeanArpojanSisaanAlussa(){
+        this.logiikka = new Logiikka();
+        assertEquals(this.logiikka.luoBlokki(), 3);
+    }
+    
+    @Test
+    public void objektinArpojaMeneeOikeaanPaikkaanKunArvoYliNollan(){
+        this.logiikka = new Logiikka();
+        this.logiikka.setErikoisVihollinen(1);
+        assertEquals(this.logiikka.luoBlokki(), 2);
+        assertEquals(this.logiikka.getErikoisVihollinen(), 0);
+        
+        
+    }
+    @Test
+    public void objektinArpojaMeneeOikeaanPaikkaanKunArvViisi(){
+        this.logiikka = new Logiikka();
+        this.logiikka.setErikoisVihollinen(-5);
+        assertEquals(this.logiikka.luoBlokki(), 1);
+        assertEquals(this.logiikka.getErikoisVihollinen(), 1);
+    }
+    
     
 }

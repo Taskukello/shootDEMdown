@@ -12,7 +12,8 @@ import toiminta.pelaaja.Alus;
 import toiminta.vihollisobjekti.VihollisObjekti;
 
 /**
- *aloittaa pelin
+ * aloittaa pelin
+ *
  * @author Aki
  */
 public class PaaOhjelma {
@@ -28,6 +29,7 @@ public class PaaOhjelma {
         Logiikka peli = new Logiikka(kayttoliittyma);
         peli.valmisteleAlusta();
         peli.pelaa();
+
     }
 
 }

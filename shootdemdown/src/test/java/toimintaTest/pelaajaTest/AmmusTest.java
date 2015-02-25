@@ -61,7 +61,7 @@ public class AmmusTest {
 
     @Test
     public void getKokoAntaaOikeanArvon() {
-        assertEquals(ammus.getKoko(), 6);
+        assertEquals(ammus.getLeveys(), 6);
     }
 
     @Test

@@ -36,8 +36,12 @@ public class Ammus {
         return y;
     }
 
-    public int getKoko() {
+    public int getLeveys() {
         return this.leveys;
+    }
+    
+    public int getKorkeus(){
+        return this.ammuksenPituus;
     }
 
     public void siirry() {
@@ -46,14 +50,4 @@ public class Ammus {
         }
     }
 
-
-    public void piirra(Graphics graphics, int x, int y) {
-        if (x != -1) {
-            this.x = x + 7;
-            this.y = y;
-        }
-        graphics.setColor(Color.ORANGE);
-        graphics.fillRect(this.x, 700 - this.y, leveys, ammuksenPituus);
-
-    }
 }

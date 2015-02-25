@@ -86,7 +86,9 @@ public class AlusTest {
         this.alus.lisaaElama();
         this.alus.lisaaElama();
         this.alus.lisaaElama();
-        assertEquals(this.alus.getElamat(), 5);
+        this.alus.lisaaElama();
+        this.alus.lisaaElama();
+        assertEquals(this.alus.getElamat(), 7);
     }
     
     @Test

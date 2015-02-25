@@ -17,8 +17,8 @@ import toiminta.pelaaja.Ammus;
 
 /**
  * luokka on pelin toiminan ydin. kaiken olennaisen liikkumisen ylläpitämisen ja
- * pisteiden ylläpitämisen
- *-
+ * pisteiden ylläpitämisen -
+ *
  * @author Aki
  */
 public class Logiikka {
@@ -31,11 +31,12 @@ public class Logiikka {
     private int liikkumiskerrat = 42;
     private boolean kuoleekoPelaaja = true;
     private Kayttoliittyma liittyma;
-    private int viivytysAika = 100;
+    private int viivytysAika = 1000;
     private int pisteet = 0;
     private int osumat = 0;
     private long liikuntaRajotin = 0;
     private long odotusAika = 100;
+    private int erikoisVihollinen = 0;
 
     public Logiikka(Kayttoliittyma liittyma) {
         this.liittyma = liittyma;
@@ -66,11 +67,16 @@ public class Logiikka {
      * on välttämätön muuten käyttliittymä sekoaa.
      */
     public void valmisteleAlusta() {
-        this.viivytysAika = 1000;                                   //voi olla konekohtainen ongelma mutta ilman tätä ohjelma hajoaa 
+
         viivyta();
         this.liittyma.setAlus(alus);
         this.liittyma.luoNappaimistonKuuntelija();
-        this.viivytysAika = 100;
+
+    }
+
+    public void valmisteleUusiPeli() {
+        this.liittyma.setAlus(alus);
+
     }
 
     /**
@@ -126,7 +132,7 @@ public class Logiikka {
      * liikuttaa kaikkia olemassaolevia ammuksia ja tarpeentullen tuhoaa ne.
      */
     public void liikutaKaikkiaAmmuksia() {
-        this.ammukset = alus.getAmmukset();
+     //   this.ammukset = alus.getAmmukset();
         for (Ammus ammus : ammukset) {
             ammus.siirry();
             osuukoAmmus(ammus);
@@ -135,7 +141,7 @@ public class Logiikka {
             }
         }
         poistaAmmuksia();
-        alus.setAmmukset(ammukset);
+      //  alus.setAmmukset(ammukset);
 
     }
 
@@ -226,7 +232,7 @@ public class Logiikka {
         int ox = objekti.getX();
         int ax = alus.getX();
 
-        if (objekti.getY() == 120) {
+        if (objekti.getY() <= 120 && objekti.getY() > 80) {
             if (ox < ax && ox + objekti.getKoko() > ax || ox > ax && ox < ax + this.alus.getKoko() || ax == ox) {
                 int k = tarkista.osuma();
                 if (k == 2) {
@@ -252,12 +258,38 @@ public class Logiikka {
     }
 
     /**
-     * arpoo millainen vihollisobjekti syntyy ja luo sen
+     * arpoo millainen vihollisobjekti syntyy ja luo sen rajoittaa
+     * erikoisblokkien syntymistä
+     *
+     * @return return arvot ovat avustamaan testien toimintaa
      */
-    public void luoBlokki() {
+    public int luoBlokki() {
         ObjektinArpoja arpoja = new ObjektinArpoja();
-        VihollisObjekti objekti = new VihollisObjekti(arpoja.arvoObjekti(), arpoja.arvoKoordinaatti());
-        viholliset.add(objekti);
+        VihollisObjekti objekti;
+        int k = 0;
+        if (erikoisVihollinen == -5) {
+            arpoja = new ObjektinArpoja(true);
+            objekti = new VihollisObjekti(arpoja.arvoObjekti(), arpoja.arvoKoordinaatti());
+            erikoisVihollinen--;
+            erikoisVihollinen = 1;
+            k = 1;
+        } else if (erikoisVihollinen > 0) {
+            objekti = new VihollisObjekti(1, arpoja.arvoKoordinaatti());
+            erikoisVihollinen--;
+            k = 2;
+        } else {
+            int muoto = arpoja.arvoObjekti();
+            objekti = new VihollisObjekti(muoto, arpoja.arvoKoordinaatti());
+            this.erikoisVihollinen--;
+            k = 3;
+            if (muoto == 2 || muoto == 3) {
+                this.erikoisVihollinen = 3;
+                k = 4;
+            }
+
+        }
+        this.viholliset.add(objekti);
+        return k;
 
     }
 
@@ -316,14 +348,12 @@ public class Logiikka {
         this.liikkumiskerrat = o;
     }
 
-    //-------------------------------------------------
     public int getVihollisetKoko() {
 
         return this.viholliset.size();
 
     }
 
-    //-------------------------------------------------
     public ArrayList<VihollisObjekti> getViholliset() {
         return this.viholliset;
 
@@ -377,5 +407,20 @@ public class Logiikka {
     public void setOdotusAika(long odotus) {
         this.odotusAika = odotus;
     }
+
+    public void setErikoisVihollinen(int arvo) {
+        this.erikoisVihollinen = arvo;
+    }
+
+    public int getErikoisVihollinen() {
+        return this.erikoisVihollinen;
+    }
+
+    public void setPisteet(int k) {
+        this.pisteet = k;
+    }
+
+
+
 
 }

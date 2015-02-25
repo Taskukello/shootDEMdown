@@ -20,7 +20,8 @@ import toiminta.pelaaja.Alus;
 import toiminta.pelaaja.Ammus;
 
 /**
- *ylläpitää käyttöliittymää
+ * ylläpitää käyttöliittymää
+ *
  * @author Aki
  */
 public class Kayttoliittyma implements Runnable {
@@ -84,8 +85,8 @@ public class Kayttoliittyma implements Runnable {
      */
     public void luoNappaimistonKuuntelija() {
         this.kuuntelija = new NappaimistonKuuntelija(alus, piirtoalusta);
-            frame.addKeyListener(this.kuuntelija);
-       
+        frame.addKeyListener(this.kuuntelija);
+
     }
 
     /**
@@ -109,17 +110,13 @@ public class Kayttoliittyma implements Runnable {
         container.removeAll();
         JLabel nimiTeksti = new JLabel("PELI LOPPUI!");
         JLabel loppuPisteet = new JLabel("Pisteesi: " + this.pisteet);
-        JButton pelaaUudelleen = new JButton("Pelaa uudelleen!"); // tämä nappi ei tee vielä yhtään mitään.
 
-        Resetoija resetoija = new Resetoija(this.frame);
-        pelaaUudelleen.addActionListener(resetoija);
 
         nimiTeksti.setFont(new Font("mitakohatassakipitaslukea", Font.BOLD, 50));
         loppuPisteet.setFont(new Font("envielakaantieda", Font.PLAIN, 22));
 
         container.add(nimiTeksti, BorderLayout.NORTH);
         container.add(loppuPisteet, BorderLayout.CENTER);
-        container.add(pelaaUudelleen, BorderLayout.SOUTH);
         container.repaint();
 
         frame.pack();

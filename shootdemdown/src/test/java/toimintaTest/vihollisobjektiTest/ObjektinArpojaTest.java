@@ -14,7 +14,8 @@ import static org.junit.Assert.*;
 import toiminta.vihollisobjekti.ObjektinArpoja;
 
 /**
- *testaa arvonta luokan
+ * testaa arvonta luokan
+ *
  * @author Aki
  */
 public class ObjektinArpojaTest {
@@ -82,7 +83,6 @@ public class ObjektinArpojaTest {
         this.arpoja.setProsentti(91);
         assertEquals(this.arpoja.maaritaObjekti(), 3);
     }
-    
 
     @Test
     public void onkoObjektinKoordinaattiAlussaNolla() {
@@ -112,4 +112,5 @@ public class ObjektinArpojaTest {
         }
 
     }
+
 }
