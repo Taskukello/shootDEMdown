@@ -1,8 +1,9 @@
 **Aihe**: peli jossa pelaaja liikkuu "aluksella" vasemalle ja oikealle. Pelaajaa päin lentää aluksia jonka syntymisen ja ilmestymisen
-kohdan (x-koordinaatistolla) tietokone arpoo. Pelaajan tulee ampua objektit ennen kuin ne ohittavat hänet tai osuvat häneen.
-Objekteja on kolmenlaisia, normaalit jotka pitää ampua, yhden elämänpisteen antavat, ja arpa joka antaa sinulle jonkin parannuksen.
+kohdan (x-koordinaatistolla) tietokone arpoo. Pelaajan tulee ampua objektit ennen kuin ne ohittavat hänet tai osuvat häneen. Poikkeuksena Erikoisblokit jotka pitää kerätä.
+Tällöin pelaaja saa bonuksia. Punaisista elämän, sinisistä ampumisnopeus kiihtyy. Jos pelaaja epänonnistuu tuhoamaan viholliset ennen kuin ne saavuttavat nollapisteen rangaistaan häntä pisteenmenetyksellä.
+Elämän menettää myös jos vihollinen on musta ja se osuu pelaajaan.
 
-**käyttäjät**: opiskelija
+**käyttäjät**: pelaaja
 
 ##käyttäjien toiminnot
 
