@@ -148,3 +148,27 @@ __________________________________________
 **kohde**
 henkilökohtaisista syistä en ole kyennyt tekemään tuntikirjaa ja ohjelmaa itsekkin juuri sen verran että se on
 edistynyt. Kahden viimeisen viikon aikana bugeja korjattu, peliä balansoitu, ja käyttöliittymää paranneltu
+
+___________________________________________
+**päivämäärä**:24.2.2015
+
+**aika**:16.00-18.00
+
+**kohde**
+bugeja korjailtu ja ohjelmaa viimeistelty, gitin kanssa kiroultu
+
+___________________________________________
+**päivämäärä**:25.2.2015
+
+**aika**:15.20-18.00
+
+**kohde**
+bugeja korjattu. dokumentaation viimeistelyä
+
+____________________________________________
+**päivämäärä**:26.2.2015
+
+**aika**:15.15-16.15
+
+**kohde**
+ohjelman viimeistä tarkistusta suoritettu ja palautettu.
