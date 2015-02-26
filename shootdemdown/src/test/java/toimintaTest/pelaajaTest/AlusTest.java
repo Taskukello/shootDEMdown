@@ -120,5 +120,14 @@ public class AlusTest {
         assertEquals(this.alus.getX(), 0);
     }
     
+    @Test
+    public void eiMiinustaKunPisteetOnNolla(){
+        this.alus.menetaElama();
+        this.alus.menetaElama();
+        this.alus.menetaElama();
+        this.alus.menetaElama();
+        assertEquals(this.alus.getElamat(), 0);
+    }
+    
 
 }

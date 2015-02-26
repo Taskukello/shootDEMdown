@@ -53,7 +53,10 @@ public class Alus {
      * @return palauttaa true jos elämiä on vielä jäljellä
      */
     public boolean menetaElama() {
-        this.elamat--;
+        if (this.elamat > 0) {
+            this.elamat--;
+
+        }
         return this.elamat != 0;
     }
 
@@ -104,17 +107,20 @@ public class Alus {
         return this.koko;
     }
 
-    
-     public ArrayList<Ammus> getAmmukset() {
-     return this.ammukset;
-     }
+    public ArrayList<Ammus> getAmmukset() {
+        return this.ammukset;
+    }
 
-     public void setAmmukset(ArrayList<Ammus> ammus) {
-     this.ammukset = ammus;
-     }
+    public void setAmmukset(ArrayList<Ammus> ammus) {
+        this.ammukset = ammus;
+    }
 
-     public void addAmmus(Ammus ammus) {
-     this.ammukset.add(ammus);
-     }
-     
+    public void addAmmus(Ammus ammus) {
+        this.ammukset.add(ammus);
+    }
+
+    public void setElamat(int ela) {
+        this.elamat = ela;
+    }
+
 }

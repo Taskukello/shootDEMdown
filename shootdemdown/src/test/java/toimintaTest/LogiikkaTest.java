@@ -45,10 +45,6 @@ public class LogiikkaTest {
         
     }
     
-    @After
-    public void tearDown() {
-    }
-    
     @Test
     public void onkoVihollisiaAlussaNolla() {
         Logiikka j = new Logiikka(this.kayttoliittyma);

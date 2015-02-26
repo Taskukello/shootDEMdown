@@ -102,6 +102,7 @@ public class Logiikka {
     public void lopetaPeli() {
         this.ammukset.removeAll(ammukset);
         this.viholliset.removeAll(ammukset);
+        
         this.liittyma.luoLoppuNakyma(this.liittyma.getFrame().getContentPane());
     }
 
@@ -281,7 +282,7 @@ public class Logiikka {
             k = 3;
             if (muoto == 2 || muoto == 3) {
                 this.erikoisVihollinen = 3;
-                k = 4;
+                k = 3;
             }
 
         }
