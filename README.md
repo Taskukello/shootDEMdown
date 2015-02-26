@@ -1,2 +1,2 @@
 # shootDEMdown
-peli ''pelattavassa'' kunnossa bugeja... paljon bugeja.. ja paljon puuttuvaa sisältöä
+Suurin osa pelin bugeista korjattu, dokumentaatio laitettu tarkistuskuntoon
